@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>一粒麦子</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="一粒麦子">
+<meta property="og:url" content="http://maiz.me/index.html">
+<meta property="og:site_name" content="一粒麦子">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一粒麦子">
+  
+    <link rel="alternate" href="/atom.xml" title="一粒麦子" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">一粒麦子</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://maiz.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2019-2019-05-28-git-usage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/2019-2019-05-28-git-usage/" class="article-date">
+  <time datetime="2019-06-20T05:16:56.452Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/2019-2019-05-28-git-usage/">git的简单使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>版本控制 ： 记录文件的修改记录，提供查看，回滚的功能；团队协作编码</p>
+<p>git： 一个快速高效的版本管理工具 <a href="https://git-scm.com" target="_blank" rel="noopener">官网</a> </p>
+<p>git教程： <a href="https://git-scm.com/book/zh/v2/" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2/</a></p>
+<p>git 文件状态：</p>
+<ul>
+<li>untracked  未追踪的，本地文件，git未管理</li>
+<li>unmodified  未修改的，git管理该文件但是没有修改过</li>
+<li>modified  已修改的，自从上次提交后作出了修改</li>
+<li>staged     已暂存 ，存入到了暂存区</li>
+<li></li>
+</ul>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>git add –all     添加到暂存区</p>
+<p>git commit -m 提交到仓库</p>
+<p>git commit –amend  修复上次提交，将本次的代码提交到上次提交中，只是提交消息改变</p>
+<p>git push    推送到远程服务器</p>
+<p>git pull     从远程服务器拉取</p>
+<p>git reset  HEAD {文件} 取消上次提交，回到暂存状态</p>
+<p>git checkout –  {文件}  将文件覆盖为之前的提交，所有修改丢失</p>
+<p>git log 查看git历史</p>
+<p>将本地仓库提交并关联到远程仓库的一些操作</p>
+<ul>
+<li><p>git init  在本文件夹初始化仓库</p>
+</li>
+<li><p>服务器创建仓库，添加readme.md</p>
+</li>
+<li><p>git remote add origin master  REPO_URL 添加远程仓库到本地</p>
+</li>
+<li><p>git pull origin master –allow-unrelated-histories  从远程仓库拉取代码</p>
+<p>结果.gitignore 冲突，删掉冲突部分之后重新提交 git add –all</p>
+</li>
+<li><p>git commit </p>
+</li>
+<li><p>git push -u origin master  其中-u将提交的地址绑定到当前仓库，之后就可以直接提交了</p>
+</li>
+</ul>
+<h2 id="GitEE使用tips"><a href="#GitEE使用tips" class="headerlink" title="GitEE使用tips"></a>GitEE使用tips</h2><p>默认仓库的master分支和develop分支是被保护的，即便是加入了项目的开发者也是无法提交的，可以改成“常用分支”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://maiz.me/2019/06/20/2019-2019-05-28-git-usage/" data-id="cjx481hxj000knygwwj7juzvg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/version-control/">version control</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-2017-09-06-spring-logback" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/2017-2017-09-06-spring-logback/" class="article-date">
+  <time datetime="2019-06-20T05:16:56.451Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/2017-2017-09-06-spring-logback/">spring与logback集成的坑</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>spring本身使用的commons-logging来做日志。为了集成logback需要先去掉commons-logging之后再加入jcl-over-slf4j的依赖作桥接，最后加入logback-classic的依赖来做日志处理。<br>首先<strong>每个</strong>spring的依赖中排除掉commons-logging依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-orm<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>再加入logback桥接和实现</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- logback --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jcl-over-slf4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.21<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-classic<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来添加logback.xml到resources目录下，配置大致如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"STDOUT"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.ConsoleAppender"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%thread] %-5level %logger&#123;36&#125; - %msg%n</span><br><span class="line">			<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"LOGFILE"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span> &gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">Encoding</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>%d %p [%t] [%c]:%L - %m%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.ThresholdFilter"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">level</span>&gt;</span>DEBUG<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>d:/tmp/%d&#123;yyyy-MM-dd-HH'.log'&#125;<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"org.springframework"</span> <span class="attr">level</span>=<span class="string">"INFO"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"java.sql.PreparedStatement"</span> <span class="attr">level</span>=<span class="string">"INFO"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"ch.qos.logback"</span> <span class="attr">level</span>=<span class="string">"WARN"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"com.chinasofti.framework.ssm"</span> <span class="attr">level</span>=<span class="string">"DEBUG"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"INFO"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"LOGFILE"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"STDOUT"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>参考<br><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#overview-logging-slf4j" target="_blank" rel="noopener">spring手册相关内容</a><br><a href="https://logback.qos.ch/manual/configuration.html" target="_blank" rel="noopener">logback手册配置</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://maiz.me/2019/06/20/2017-2017-09-06-spring-logback/" data-id="cjx481hxh000hnygwizjeptbu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/logback/">logback</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-2017-04-20-vim-tutorial" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/2017-2017-04-20-vim-tutorial/" class="article-date">
+  <time datetime="2019-06-20T05:16:56.450Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/2017-2017-04-20-vim-tutorial/">vim简单教程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>vim 简史</li>
+</ul>
+<p>vim,上古神器，诞生于1988年，而其前身（ed、ex、vi）甚至可以追溯到unix时代。（参见 <a href="http://arch.pconline.com.cn//pcedu/soft/gj/photo/0609/877033.html" target="_blank" rel="noopener">vim-程序员的编辑器）</a></p>
+<p>vim诞生的年代没有鼠标，键盘也没有丰富的功能键，因祸得福，所有的编辑工作都通过键盘完成。效率的提高，其中一个原因是手不离键盘。</p>
+<p>vim的学习曲线是很陡的，也就是说入门是困难的。但是适应了键盘操作之后，会带来效率的极大提高。下图为常见编辑器的学习曲线。vi和同为神器级别的emacs的曲线确实夸张。因此学习vim 的第一要务是“存活下来”（stay alive）。</p>
+<p><img src="/images/vim/horrorstories.txt.jpg" alt="vim学习曲线"></p>
+<p>Linux下自带vi，但建议安装vim或者gvim，Windows下可以安装<a href="http://www.vim.org/download.php" title="gvim下载地址" target="_blank" rel="noopener">gvim</a>或者<a href="http://babun.github.io/" title="babun" target="_blank" rel="noopener">babun</a>来使用Linux下的vim。</p>
+<ol>
+<li><p>vim基础</p>
+<ul>
+<li><p>关于vim的模式</p>
+<ul>
+<li>vim分为4个模式<ul>
+<li>normal 正常模式  </li>
+<li>insert   插入模式</li>
+<li>command 命令模式</li>
+<li>visual 可视模式</li>
+</ul>
+</li>
+<li>切换<ul>
+<li>正常模式下按以下键进入插入模式<ul>
+<li><code>i</code>  在光标处插入</li>
+<li><code>a</code>  在光标之后插入</li>
+<li><code>A</code>  在光标所在行之后插入</li>
+<li><code>o</code>  新开一行并开始插入</li>
+<li><code>O</code>  上一行并开始插入</li>
+<li><code>s</code>  删除当前字符并插入</li>
+<li><code>S</code>  删除当前行并插入</li>
+</ul>
+</li>
+<li>其他模式进入正常模式<ul>
+<li><code>ESC</code></li>
+</ul>
+</li>
+<li>正常模式进入命令模式<ul>
+<li>英文的冒号 <code>:</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>打开、保存与退出</p>
+<ul>
+<li>打开：vim 文件名 打开文件，如果文件不存在则新建文件</li>
+<li>​保存：在命令模式下执行w，也就是<code>:w</code></li>
+<li>退出：<ol>
+<li>没有更改直接退出执行<code>:q</code></li>
+<li>保存更改并退出则<code>:wq</code>    </li>
+<li>或者执行x 也就是<code>:x</code></li>
+<li>不保存更改执行<code>:!q</code></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>导航</p>
+<ul>
+<li><p>常用</p>
+<ul>
+<li><code>h</code> <code>j</code> <code>k</code> <code>l</code>   分别是上下左右导航</li>
+<li>gg 到头</li>
+<li>G 到尾</li>
+<li>0 到行首</li>
+<li>$ 到行尾</li>
+<li>w 下一个单词前，在中文中用途不大</li>
+<li>ngg/ nG ,到某一行如10gg 到第10行</li>
+<li>/{关键字}， 向下搜索</li>
+<li>?{关键字}，向上搜索</li>
+</ul>
+</li>
+<li><p>按页滚动</p>
+<ul>
+<li><code>ctrl+d</code>  向下滚动半页</li>
+<li><code>ctrl+u</code>   向上滚动半页</li>
+<li><code>ctrl+f</code>  向下滚动一页</li>
+<li><code>ctrl+b</code> 向上滚动一页</li>
+</ul>
+</li>
+<li><p>按屏幕</p>
+<ul>
+<li><code>H</code> 移到屏幕顶端的行-home</li>
+<li><code>M</code> 移到屏幕中央的行-middle</li>
+<li><code>L</code> 移到屏幕底端的行-last</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>编辑操作(按<code>ESC</code>确保自己在正常模式下)</p>
+<ul>
+<li>复制 y<ul>
+<li>复制1行 yy</li>
+<li>复制光标向下所在的n行 yny</li>
+<li>复制1个单词 yw</li>
+</ul>
+</li>
+<li>粘贴 p</li>
+<li>删除 d<ul>
+<li>删除1行 dd</li>
+<li>删除n行 dnd</li>
+<li>删除（其实是剪切）1个字母 x</li>
+<li>删除1个单词 dw</li>
+<li>删除到行尾 d$</li>
+</ul>
+</li>
+<li>重做/撤销<ul>
+<li>重做 ctrl+r</li>
+<li>撤销 u</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://maiz.me/2019/06/20/2017-2017-04-20-vim-tutorial/" data-id="cjx481hxf000cnygwvyudf7zp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-2017-09-12-aliyun-init" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/2017-2017-09-12-aliyun-init/" class="article-date">
+  <time datetime="2019-06-20T05:16:56.450Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/2017-2017-09-12-aliyun-init/">阿里云服务器环境搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们遇上了云的时代，系统运维比以前任何一个时代都简单直接。</p>
+<p>将自己最近阿里云服务器环境部署的步骤记录下来，分享给大家，也是自己做个记录</p>
+<p>OS信息：</p>
+<blockquote>
+<p>Linux version 2.6.32-696.3.2.el6.x86_64 (<a href="mailto:mockbuild@c1bl.rdu2.centos.org" target="_blank" rel="noopener">mockbuild@c1bl.rdu2.centos.org</a>) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-18) (GCC) ) #1 SMP Tue Jun 20 01:26:55 UTC 2017</p>
+<p>LSB Version:    :base-4.0-amd64:base-4.0-noarch:core-4.0-amd64:core-4.0-noarch<br>Distributor ID:    CentOS<br>Description:    CentOS release 6.8 (Final)<br>Release:    6.8<br>Codename:    Final</p>
+</blockquote>
+<p>SSH客户端:Xshell5</p>
+<ul>
+<li>目录<ul>
+<li>系统初始化</li>
+<li>jdk1.8</li>
+<li>tomcat (运行应用)</li>
+<li>mysql(数据库)</li>
+<li>git（远程checkout代码） </li>
+<li>阿里云code（代码仓库管理）</li>
+<li>maven(编译打包)</li>
+</ul>
+</li>
+</ul>
+<h3 id="系统初始化"><a href="#系统初始化" class="headerlink" title="系统初始化"></a>系统初始化</h3><p>远程root登录到系统，<a href="http://www.cnblogs.com/clicli/p/5943788.html" target="_blank" rel="noopener">创建用户</a>并<a href="http://blog.csdn.net/newairzhang/article/details/7715378" target="_blank" rel="noopener">赋权</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#创建用户，-m创建主目录,-p指定密码</span></span><br><span class="line"> useradd lucas -p serect -m</span><br><span class="line"><span class="comment">#添加到sudoer,该命令比vim /etc/sudoers要方便</span></span><br><span class="line">visudo</span><br><span class="line"><span class="comment">#找到   root    ALL=(ALL)       ALL 一行之后yyp，复制一行，将root改成自己的用户名，若sudoer时不需要密码怎写上前缀NOPASSWD:,注意是WD不是WORD</span></span><br><span class="line"><span class="comment">#修改完成后为</span></span><br><span class="line">	<span class="comment">## Allow root to run any commands anywhere</span></span><br><span class="line">	<span class="comment">#root    ALL=(ALL)       ALL</span></span><br><span class="line">	<span class="comment">#lucas   ALL=(ALL)       NOPASSWD:ALL</span></span><br></pre></td></tr></table></figure>
+
+<p>重新在xshell中建连接，用新建的用户lucas连接上系统，继续以下步骤</p>
+<h3 id="jdk1-8"><a href="#jdk1-8" class="headerlink" title="jdk1.8"></a>jdk1.8</h3><p>下载jdk的tarball（下载见文章后附分享），使用xshell自带的上传工具(或者可以直接安装<code>sudo yum install lrzsz</code> 用rz也可以)上传到tmp目录下，我在home目录下建了以下目录<br>/home/lucas<br>├── apps<br>├── code<br>└── tmp<br><a href="http://blog.csdn.net/licongcong_0224/article/details/12756959/" target="_blank" rel="noopener">解压安装</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /user/java</span><br><span class="line">sudo cp ~/tmp/jdk-8u144-linux-x64.tar.gz .</span><br><span class="line">sudo tar -zxvf jdk-8u144-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>打开/etc/profile（vim /etc/profile）,加入如下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/java/jdk1.8.0_144</span><br><span class="line">CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib.tools.jar</span><br><span class="line">PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME CLASSPATH PATH</span><br></pre></td></tr></table></figure>
+
+<p><code>sudo source /etc/profile</code>使之立即生效</p>
+<p><code>java -version</code> 检查是否生效</p>
+<h3 id="tomcat"><a href="#tomcat" class="headerlink" title="tomcat"></a>tomcat</h3><p>下载tomcat的tarball，上传到 tmp目录之后再<a href="http://www.linuxidc.com/Linux/2015-08/122241.htm" target="_blank" rel="noopener">解压安装</a>之</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cp tmp/apache-tomcat-8.0.36.tar.gz apps/</span><br><span class="line"><span class="built_in">cd</span> apps/</span><br><span class="line">tar -zxf apache-tomcat-8.0.36.tar.gz</span><br><span class="line"><span class="comment">#直接启动</span></span><br><span class="line"><span class="built_in">cd</span> apache-tomcat-8.0.36</span><br><span class="line">./bin/catalina.sh start</span><br><span class="line"><span class="comment">#查看日志</span></span><br><span class="line">tail -f logs/catalina.out</span><br></pre></td></tr></table></figure>
+
+<p>将需要部署的war拷贝到tomcat的webapps目录下，然后重启tomcat即可访问</p>
+<p>###mysql<br><a href="http://www.linuxidc.com/Linux/2015-07/120234.htm" target="_blank" rel="noopener">参考</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 安装mysql</span><br><span class="line">sudo yum install -y mysql-server mysql mysql-deve</span><br><span class="line"># 检查安装</span><br><span class="line">rpm -qi mysql-server</span><br></pre></td></tr></table></figure>
+
+<p>我的显示如下，安装成功</p>
+<blockquote>
+<p>Name        : mysql-server                 Relocations: (not relocatable)<br>Version     : 5.1.73                            Vendor: CentOS<br>Release     : 8.el6_8                       Build Date: Fri 27 Jan 2017 06:25:43 AM CST<br>Install Date: Tue 12 Sep 2017 10:46:25 AM CST      Build Host: c1bm.rdu2.centos.org<br>Group       : Applications/Databases        Source RPM: mysql-5.1.73-8.el6_8.src.rpm<br>Size        : 25884131                         License: GPLv2 with exceptions<br>Signature   : RSA/SHA1, Fri 27 Jan 2017 06:35:28 AM CST, Key ID 0946fca2c105b9de<br>Packager    : CentOS BuildSystem <a href="http://bugs.centos.org" target="_blank" rel="noopener">http://bugs.centos.org</a><br>URL         : <a href="http://www.mysql.com" target="_blank" rel="noopener">http://www.mysql.com</a><br>Summary     : The MySQL server and related files<br>Description :<br>MySQL is a multi-user, multi-threaded SQL database server. MySQL is a<br>client/server implementation consisting of a server daemon (mysqld)<br>and many different client programs and libraries. This package contains<br>the MySQL server and some accompanying files and directories.</p>
+</blockquote>
+<p>然后启动mysql服务，第一次启动需要一些初始化动作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动服务</span></span><br><span class="line">sudo service mysqld start</span><br><span class="line"><span class="comment"># 重启服务</span></span><br><span class="line">sudo service mysqld restart</span><br><span class="line"><span class="comment">#设置root密码</span></span><br><span class="line">mysqladmin -u root password <span class="string">'&#123;您的密码&#125;'</span></span><br></pre></td></tr></table></figure>
+
+<p>之后用root账户登入mysql，根据提示输入密码即可操作数据库了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><p>centos安装git还是很简单</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install git</span><br><span class="line"></span><br><span class="line"><span class="comment">#之后就可以git clone 了</span></span><br><span class="line">git <span class="built_in">clone</span> git@code.aliyun.com:aaa/bbb.git</span><br></pre></td></tr></table></figure>
+
+<p>服务器上的git只用作检出代码之后再打包，并不提交。</p>
+<h3 id="阿里云code"><a href="#阿里云code" class="headerlink" title="阿里云code"></a>阿里云code</h3><p>部署环境都搭建好了，总是通过war上传的方式来部署还是有点low的，自然想到了版本管理工具了。当然选择git了。第一反应是码云，不过想想阿里云估计也有相应的托管服务。果然，<a href="https://code.aliyun.com。" target="_blank" rel="noopener">https://code.aliyun.com。</a></p>
+<p>git仓库的使用方式都差不多，先建立仓库，之后用ssh-keygen生成一个sshkey到 ~/.ssh/id_rsa.pub，添加到仓库之后，就可以在本地服务器上上传代码了。</p>
+<p>windows安装git，可以考虑<a href="https://git-for-windows.github.io/" target="_blank" rel="noopener">msysgit</a> 或者<a href="https://tortoisegit.org/" target="_blank" rel="noopener">tortoisegit</a>，本人使用的是cygwin的变种<a href="http://babun.github.io/" target="_blank" rel="noopener">babun</a><br>以下为添加readme.md的操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git clone git@code.aliyun.com:aaa/bbb.git</span><br><span class="line">cd ssm</span><br><span class="line">touch readme.md</span><br><span class="line">vim readme.md</span><br><span class="line">git add readme.md</span><br><span class="line">git commit -m &apos;添加readme&apos;</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<p>使用类似的方式将代码上传到仓库，再去服务器上git pull下来就可以了。</p>
+<h3 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h3><p>maven可以直接将代码构建成部署包，所以也是必备的。<a href="http://blog.csdn.net/clementad/article/details/46898013" target="_blank" rel="noopener">参考</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/tmp</span><br><span class="line"><span class="comment">#下载tarball</span></span><br><span class="line">wget http://mirrors.hust.edu.cn/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz</span><br><span class="line"><span class="comment">#复制到/usr/local/，并解压</span></span><br><span class="line">sudo mv apache-maven-3.5.0-bin.tar.gz /usr/<span class="built_in">local</span>/</span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/</span><br><span class="line">sudo tar zxf apache-maven-3.5.0-bin.tar.gz</span><br><span class="line">sudo rm apache-maven-3.5.0-bin.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>需要配置下maven的镜像，使用墙内阿里云镜像，否则去墙外中央仓库拉包龟速。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd apache-maven-3.5.0/</span><br><span class="line">sudo vim conf/settings.xml</span><br></pre></td></tr></table></figure>
+
+<p>找到&lt;mirrors&gt;标签,加入以下配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span>  </span><br><span class="line">       <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span>         </span><br><span class="line">   <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>配置/etc/profile,加入maven的环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#maven</span><br><span class="line">export M2_HOME=/usr/local/apache-maven-3.5.0/</span><br><span class="line">export PATH=$PATH:$M2_HOME/bin</span><br></pre></td></tr></table></figure>
+
+<p>退出之后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#使配置立即生效</span><br><span class="line">source /etc/profile</span><br><span class="line">maven -version</span><br></pre></td></tr></table></figure>
+
+<p>看到类似如下界面即表示成功。</p>
+<blockquote>
+<p>Apache Maven 3.5.0 (ff8f5e7444045639af65f6095c62210b5713f426; 2017-04-04T03:39:06+08:00)<br>Maven home: /usr/local/apache-maven-3.5.0<br>Java version: 1.8.0_144, vendor: Oracle Corporation<br>Java home: /usr/java/jdk1.8.0_144/jre<br>Default locale: en_US, platform encoding: UTF-8<br>OS name: “linux”, version: “2.6.32-696.3.2.el6.x86_64”, arch: “amd64”, family: “unix”</p>
+</blockquote>
+<p>之后可以去项目目录下执行<code>mvn clean package</code>打包项目，再拷贝到tomcat目录下就可以部署了。当然第一次执行是很慢的，各种包拉一遍。</p>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p>文章中涉及到的软件：<br>链接: <a href="https://pan.baidu.com/s/1kVss1jp" target="_blank" rel="noopener">https://pan.baidu.com/s/1kVss1jp</a> 密码: tfb2</p>
+<p>参考文章（感谢各位的分享）</p>
+<p>创建用户 <a href="http://www.cnblogs.com/clicli/p/5943788.html" target="_blank" rel="noopener">http://www.cnblogs.com/clicli/p/5943788.html</a><br>sudoer配置 <a href="http://blog.csdn.net/newairzhang/article/details/7715378" target="_blank" rel="noopener">http://blog.csdn.net/newairzhang/article/details/7715378</a><br>安装jdk <a href="http://blog.csdn.net/licongcong_0224/article/details/12756959/" target="_blank" rel="noopener">http://blog.csdn.net/licongcong_0224/article/details/12756959/</a><br>mysql安装参考 <a href="http://www.linuxidc.com/Linux/2015-07/120234.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2015-07/120234.htm</a><br>maven安装参考 <a href="http://blog.csdn.net/clementad/article/details/46898013" target="_blank" rel="noopener">http://blog.csdn.net/clementad/article/details/46898013</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://maiz.me/2019/06/20/2017-2017-09-12-aliyun-init/" data-id="cjx481hxi000inygwzb643909" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aliyun/">aliyun</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/运维/">运维</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里云/">阿里云</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-2017-09-13-ssm-archetype" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/2017-2017-09-13-ssm-archetype/" class="article-date">
+  <time datetime="2019-06-20T05:16:56.450Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/2017-2017-09-13-ssm-archetype/">自定义SSM集成的archetype</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>坦白来讲，如果我看到有人还在热心于ssm是如何集成的，我觉得他一定是年纪不小了。那为啥我还要干这件事情呢？主要是想实践下maven的archetype如何制造。本以为应该很简单，但是国内的博客不给力，写的不清晰而且maven的文档实在伤人。所以折腾出来了就想出来说两句，让后来者能够省点心力。</p>
+<p>成品请见<a href="https://github.com/stickgoal/ssm-archetype" target="_blank" rel="noopener">github</a>,欢迎star，水平有限，见笑。</p>
+<p>maven的archetype是啥呢？就是按照一个模板来生成项目，啪一下就能够弄出一个目录结构和配置文件。阅读各种文章过程中，发觉archetype是基于velocity实现的。也就是说，使用archetype来创建项目的过程实际上就是一个复制文件夹，复制目录，替换文件中的变量（就是velocity的变量${var}形式的）。这样想来，archetype并没有什么神奇的。一项技术你感觉神奇的时候，最容易用上它，当你再感觉不神奇了，就是开始明白它了。</p>
+<p>来说说具体做法，我没有用<code>mvn archetype:create-from-project</code>主要是尝试了几遍都失败了，而且不知道怎么下手。索性手动来了。</p>
+<p>大致步骤：<br>1  <code>mvn archetype:generate -DarchetypeCatalog=internal</code> 选择 <code>maven-archetype-archetype</code> 创建一个archetype项目<br>2  将需要生成的文件和代码放置到<code>src\main\resources\archetype-resources</code>下
+3  在<code>src\main\resources\META-INF\maven</code>下增加一个<code>archetype-metadata.xml</code>删除<code>archetype.xml</code>。根据你的实际情况修改<code>archetype-metadata.xml</code><br>4  修改各种变量，以适应生成的需要<br>5  其他配置<br>6  测试</p>
+<p>下面来详解</p>
+<p>###生成archetype项目<br>见以下内容，GAV请自定义</p>
+<p>mvn archetype:generate -DarchetypeCatalog=internal</p>
+<pre>
+
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] >>> maven-archetype-plugin:2.4:generate (default-cli) > generate-sources @ standalone-pom >>>
+[INFO]
+[INFO] <<< maven-archetype-plugin:2.4:generate (default-cli) < generate-sources @ standalone-pom <<<
+[INFO]
+[INFO] --- maven-archetype-plugin:2.4:generate (default-cli) @ standalone-pom ---
+[INFO] Generating project in Interactive mode
+[INFO] No archetype defined. Using maven-archetype-quickstart (org.apache.maven.archetypes:maven-archetype-quickstart:1.0)
+Choose archetype:
+1: internal -> org.apache.maven.archetypes:maven-archetype-archetype (An archetype which contains a sample archetype.)
+2: internal -> org.apache.maven.archetypes:maven-archetype-j2ee-simple (An archetype which contains a simplifed sample J2EE application.)
+3: internal -> org.apache.maven.archetypes:maven-archetype-plugin (An archetype which contains a sample Maven plugin.)
+4: internal -> org.apache.maven.archetypes:maven-archetype-plugin-site (An archetype which contains a sample Maven plugin site.
+      This archetype can be layered upon an existing Maven plugin project.)
+5: internal -> org.apache.maven.archetypes:maven-archetype-portlet (An archetype which contains a sample JSR-268 Portlet.)
+6: internal -> org.apache.maven.archetypes:maven-archetype-profiles ()
+7: internal -> org.apache.maven.archetypes:maven-archetype-quickstart (An archetype which contains a sample Maven project.)
+8: internal -> org.apache.maven.archetypes:maven-archetype-site (An archetype which contains a sample Maven site which demonstrates
+      some of the supported document types like APT, XDoc, and FML and demonstrates how
+      to i18n your site. This archetype can be layered upon an existing Maven project.)
+9: internal -> org.apache.maven.archetypes:maven-archetype-site-simple (An archetype which contains a sample Maven site.)
+10: internal -> org.apache.maven.archetypes:maven-archetype-webapp (An archetype which contains a sample Maven Webapp project.)
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 7: <span style="color:red">1</span>   
+
+Define value for property 'groupId': : test
+Define value for property 'artifactId': : test
+Define value for property 'version':  1.0-SNAPSHOT: :
+Define value for property 'package':  test: :
+Confirm properties configuration:
+groupId: test
+artifactId: test
+version: 1.0-SNAPSHOT
+package: test
+ Y: :
+[INFO] ----------------------------------------------------------------------------
+[INFO] Using following parameters for creating project from Old (1.x) Archetype: maven-archetype-archetype:1.0
+[INFO] ----------------------------------------------------------------------------
+[INFO] Parameter: basedir, Value: C:\tmp
+[INFO] Parameter: package, Value: test
+[INFO] Parameter: groupId, Value: test
+[INFO] Parameter: artifactId, Value: test
+[INFO] Parameter: packageName, Value: test
+[INFO] Parameter: version, Value: 1.0-SNAPSHOT
+[INFO] project created from Old (1.x) Archetype in dir: C:\tmp\test
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 06:27 min
+[INFO] Finished at: 2017-09-13T17:11:49+08:00
+[INFO] Final Memory: 13M/155M
+[INFO] ------------------------------------------------------------------------
+
+</pre>
+
+<h3 id="放置文件及代码"><a href="#放置文件及代码" class="headerlink" title="放置文件及代码"></a>放置文件及代码</h3><p>archetype项目的不同之处在于resource目录下的archetype-resources目录，这个目录就是将应用于生成的项目的目录及代码，所以直接将文件放入即可。注意如果是从其他项目拷贝，需要拷贝pom.xml和src两个目录。</p>
+<p>区别在于目录，比如你原始项目的代码包是<code>com.abc.def.ssh</code>，那么java目录下的结构应该如下</p>
+<pre>
+└── com
+
+    └── abc
+        └── def
+            └── ssh
+                ├── common
+                ├── dal
+                ├── exceptions
+                ├── service
+                └── web
+</pre>
+<p>这里我们很容易意识到，<code>com.abc.def.ssh</code>这部分不应该包含在生成项目中而是要根据生成项目是package来生成，所以在添加目录时需要去掉该部分目录，所以archetype-resources的java目录下是这样的</p>
+<pre>
+archetype-resources/src/main/
+├── java
+│   ├── common
+│   ├── dal
+│   ├── exceptions
+│   ├── service
+│   └── web
+├── resources
+│   ├── generatorConfig.xml
+│   ├── logback.xml
+│   ├── mappers
+│   └── sql
+└── webapp
+    ├── components
+    ├── css
+    ├── fonts
+    ├── images
+    ├── index.jsp
+    ├── js
+    └── WEB-INF
+</pre>
+
+<h3 id="增加archetype-metadata-xml"><a href="#增加archetype-metadata-xml" class="headerlink" title="增加archetype-metadata.xml"></a>增加archetype-metadata.xml</h3><p>我的做法找一个archetype作为demo拷贝一个archetype-metadata.xml过来。我参考的是spring-boot-sample-actuator-log4j-archetype这个archetype，跟我的结构相似。如果你是文档控，可以看<a href="http://maven.apache.org/archetype/maven-archetype-plugin/specification/archetype-metadata.html" target="_blank" rel="noopener">官方文档</a><br>贴出全文供参考：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;archetype-descriptor xsi:schemaLocation=&quot;http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd&quot; name=&quot;spring-boot-sample-actuator-log4j&quot;</span><br><span class="line">    xmlns=&quot;http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0&quot;</span><br><span class="line">    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;</span><br><span class="line">  &lt;fileSets&gt;</span><br><span class="line">    &lt;fileSet filtered=&quot;true&quot; packaged=&quot;true&quot; encoding=&quot;UTF-8&quot;&gt;</span><br><span class="line">      &lt;directory&gt;src/main/java&lt;/directory&gt;</span><br><span class="line">      &lt;includes&gt;</span><br><span class="line">        &lt;include&gt;**/*.java&lt;/include&gt;</span><br><span class="line">      &lt;/includes&gt;</span><br><span class="line">    &lt;/fileSet&gt;</span><br><span class="line">    &lt;fileSet filtered=&quot;true&quot; encoding=&quot;UTF-8&quot;&gt;</span><br><span class="line">      &lt;directory&gt;src/main/resources&lt;/directory&gt;</span><br><span class="line">      &lt;includes&gt;</span><br><span class="line">        &lt;include&gt;**/*.xml&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.properties&lt;/include&gt;</span><br><span class="line">      &lt;/includes&gt;</span><br><span class="line">    &lt;/fileSet&gt;</span><br><span class="line">    &lt;fileSet filtered=&quot;true&quot; encoding=&quot;UTF-8&quot;&gt;</span><br><span class="line">      &lt;directory&gt;src/main/webapp&lt;/directory&gt;</span><br><span class="line">      &lt;includes&gt;</span><br><span class="line">        &lt;include&gt;**/*.xml&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.jsp&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.html&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.properties&lt;/include&gt;</span><br><span class="line">      &lt;/includes&gt;</span><br><span class="line">    &lt;/fileSet&gt;</span><br><span class="line">    &lt;fileSet encoding=&quot;UTF-8&quot;&gt;</span><br><span class="line">      &lt;directory&gt;src/main/webapp&lt;/directory&gt;</span><br><span class="line">      &lt;includes&gt;</span><br><span class="line">        &lt;include&gt;**/*.jpg&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.css&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.npmignore&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.svg&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.ttf&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.png&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.js&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.eot&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.woff&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.ico&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.md&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.json&lt;/include&gt;</span><br><span class="line">        &lt;include&gt;**/*.map&lt;/include&gt;</span><br><span class="line">      &lt;/includes&gt;</span><br><span class="line">    &lt;/fileSet&gt;</span><br><span class="line">  &lt;/fileSets&gt;</span><br><span class="line">&lt;/archetype-descriptor&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改各种变量，以适应生成的需要"><a href="#修改各种变量，以适应生成的需要" class="headerlink" title="修改各种变量，以适应生成的需要"></a>修改各种变量，以适应生成的需要</h3><p>首先需要修改的是archetype-resources下的pom.xml，将GAV全部替换成变量，语法同velocity</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>$&#123;groupId&#125;<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>$&#123;artifactId&#125;<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">packaging</span>&gt;</span>war<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>$&#123;artifactId&#125; SSM APP<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">finalName</span>&gt;</span>$&#123;artifactId&#125;<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其次，每个java文件的，package语句部分需要修改，如果你原项目的包名为<code>com.abc.def.ssh</code>,那就把这部分替换为<code>${package}</code><br>以一个java文件为例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package $&#123;package&#125;.web;</span><br><span class="line"></span><br><span class="line">import org.springframework.format.datetime.DateFormatter;</span><br><span class="line">import org.springframework.web.bind.WebDataBinder;</span><br><span class="line">import org.springframework.web.bind.annotation.InitBinder;</span><br><span class="line"></span><br><span class="line">public class BaseController &#123;</span><br><span class="line"></span><br><span class="line">    @InitBinder</span><br><span class="line">    public void initBind(WebDataBinder webDataBinder)&#123;</span><br><span class="line">        webDataBinder.addCustomFormatter(new DateFormatter(&quot;yyyy-MM-dd HH:mm:ss&quot;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再次，涉及到配置的包路径部分全部需要替换为${package}，包含但不限于mybatis的mapper配置、spring和springmvc中的配置。<br>BookMapper.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line">&lt;mapper namespace=&quot;$&#123;package&#125;.dal.mapper.BookMapper&quot;&gt;</span><br><span class="line">  &lt;resultMap id=&quot;BaseResultMap&quot; type=&quot;$&#123;package&#125;.dal.model.Book&quot;&gt;</span><br><span class="line">    &lt;!--</span><br></pre></td></tr></table></figure>
+
+<p>applicationContext.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 内容扫描 --&gt;</span><br><span class="line">	&lt;context:component-scan base-package=&quot;$&#123;package&#125;&quot;&gt;</span><br><span class="line">		&lt;context:exclude-filter type=&quot;annotation&quot;</span><br><span class="line">			expression=&quot;org.springframework.stereotype.Controller&quot; /&gt;</span><br><span class="line">	&lt;/context:component-scan&gt;</span><br></pre></td></tr></table></figure>
+
+<p>ssm-servlet.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 内容扫描 --&gt;</span><br><span class="line">   &lt;context:component-scan</span><br><span class="line">           base-package=&quot;$&#123;package&#125;.web&quot; &gt;</span><br><span class="line">   &lt;/context:component-scan&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h3><p>springmvc的配置文件名我是在<a href="https://github.com/stickgoal/ssm-archetype/blob/master/src/main/resources/archetype-resources/src/main/webapp/WEB-INF/web.xml" target="_blank" rel="noopener">web.xml</a>直接通过init-param指定的，具体请见servlet配置部分。</p>
+<p>archetype项目本身的<a href="https://github.com/stickgoal/ssm-archetype/blob/master/pom.xml" target="_blank" rel="noopener">pom</a>里我加入了编译插件，指定编译的encoding。</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>做完了以后，需要反复测试，因为很可能会遗漏各种细节。<br>首先在该项目根目录下执行<code>mvn clean install</code> 一定要clean，不然更改不会部署进去。<br>然后在根目录下执行<code>mvn archetype:update-local-catalog</code>更新本地的archetype-catalog<br>然后到另一个目录执行    <code>mvn archetype:generate -DarchetypeCatalog=local</code> 选择你自己的类型的数字，跟着指示一步步完成就可以了。这样项目就完成了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://maiz.me/2019/06/20/2017-2017-09-13-ssm-archetype/" data-id="cjx481hy40021nygw6qxuoe8w" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/archetype/">archetype</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-2017-07-17-eclipse-houtkeys" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/2017-2017-07-17-eclipse-houtkeys/" class="article-date">
+  <time datetime="2019-06-20T05:16:56.449Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/2017-2017-07-17-eclipse-houtkeys/">eclipse常用快捷键</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>要说Java IDE，现在只认idea。教学需要还是得使用eclipse，所以也总结一份常用快捷键给同学们。</p>
+<h3 id="至尊推荐"><a href="#至尊推荐" class="headerlink" title="至尊推荐"></a>至尊推荐</h3><p>alt+/   弹出辅助提示，不要写完单词，写个开头就按此快捷键，效率正确率倍增（特别是我这种喜欢长名字）</p>
+<p>ctrl+s  保存，时时按，经常按，停下输入就按，（ctrl+shift+s 保存所有编辑窗口）</p>
+<h3 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h3><p>ctrl+alt+↓   向下复制一行 ，向下就把↑改成↓</p>
+<p>alt+↓  将当前行与下一行交换，与上一行交换把↓换成↑</p>
+<p>ctrl+d  删除一行</p>
+<p>ctrl+/   注释、取消注释当前行</p>
+<p>shift+enter 新开一行并将焦点放到下一行，ctrl+shift+enter在上打开一行</p>
+<p>ctrl+shift+f  格式化代码</p>
+<h3 id="查找查看"><a href="#查找查看" class="headerlink" title="查找查看"></a>查找查看</h3><p>ctrl+o  显示快速outline,就是本类概况，有几个方法属性这类的</p>
+<p>ctrl+f  在本文中查找或替换，需要注意的是选项case sensitive(大小写敏感)、wrap search（循环查找）、regular expression(使用正则表达式匹配)。有趣的玩法启用正则替换，可以格式化文本。</p>
+<p>ctrl+h  全局查找，一般在customize里勾掉其他，只剩下file search ,可以在工作空间或者某个working set中查找</p>
+<p>ctrl+鼠标点击   按住ctrl将鼠标移动至方法上可以点击可以实现以下功能</p>
+<ul>
+<li>open declaration（打开方法声明，例如接口所在位置）</li>
+<li>open implementation(打开实现，例如接口的实现类) </li>
+<li>open return type(打开返回值类型)</li>
+</ul>
+<p>ctrl+shift+t  按类名搜索，依赖包中的类也可以搜索，支持模糊查找，*表示任何字符串？表示一个字符</p>
+<p>ctrl+shift+r  按名字搜索所有资源，可以搜索代码，html，properties，vm，jsp等任何资源</p>
+<p>f4   将光标置于类上，按f4可以查看继承体系</p>
+<p>ctrl+alt+h 查看调用栈，哪个类调用了该方法</p>
+<h3 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h3><p>alt+shift+r  光标在变量、方法、类名上时可以重命名，同步更改所有有关项</p>
+<p>alt+shift+m  选取部分抽取成方法，需要确保代码本身可以被抽成方法</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://maiz.me/2019/06/20/2017-2017-07-17-eclipse-houtkeys/" data-id="cjx481hxg000enygwztx5rkmn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具/">工具</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快捷键/">快捷键</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2016-2016-08-09-cas" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/2016-2016-08-09-cas/" class="article-date">
+  <time datetime="2019-06-20T05:16:56.449Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/2016-2016-08-09-cas/">cas协议及实现分享</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>SSO： Single sign-on 一系列相关但独立的系统之间的访问控制属性。通过支持该属性，用户可以使用一个用户ID和密码登录到相关联的系统或者无缝的登录到各系统。（<a href="https://en.wikipedia.org/wiki/Single_sign-on" target="_blank" rel="noopener">维基百科</a> 麦子译）</p>
+<p>简单说就是在一处登陆就可以访问一系列相关的系统</p>
+<p>CAS：作为项目：<a href="https://www.apereo.org/content/about" target="_blank" rel="noopener">apereo基金会</a>下的一个项目，提供企业级SSO解决方案；作为协议：a simple and powerful ticket-based protocol developed exclusively for （PROEJCT） CAS.</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><h5 id="1-总体架构"><a href="#1-总体架构" class="headerlink" title="1.总体架构"></a>1.总体架构</h5><p>既然解决的是单点登录的问题，那么就会存在一堆需要单点登录的应用。CAS的解决方案中，登陆这件事情被集中放在统一的登陆服务上处理，各个应用将用户引导到这个服务去处理，处理完之后再跳回本应用。为此，各个应用需要具备识别是否登陆、引导用户跳转、接受等候跳转的功能。这些功能都是重复的，所以考虑到每个应用包含一个客户端来处理。</p>
+<p>另一方面，作为一个流行的单点登录解决方案，需要考虑支持多种协议多种客户端各种验证方式等等。</p>
+<p>所以就有了以下这张架构图：</p>
+<p> <img src="/images/cas/cas_architecture.png" alt="cas_architecture"></p>
+<h5 id="2-大体流程"><a href="#2-大体流程" class="headerlink" title="2.大体流程"></a>2.大体流程</h5><p> 关于单点登陆的流程<a href="https://apereo.github.io/cas/4.2.x/protocol/CAS-Protocol.html" target="_blank" rel="noopener">官方的流程图</a>已经非常能够说明问题了。需要的是一点<strong>耐心和细心</strong>。</p>
+<p>解释下图中角色：User=用户，Browser=浏览器，CAS Server=负责登录的服务端，Protected APP = 一个需要单点登录的应用，Protected App #2=另一个需要单点登录的应用，区别在于，图中演示的第一步是需要用户输用户名密码登录到第一个应用，之后登录APP #2是不需要用户输用户名密码的，直接按照协议系统自动登录。</p>
+<p>再解释下cas协议定义或者使用到的几个关键概念：</p>
+<ul>
+<li><code>Service Ticket</code>（ST）   代表一个用户被授权使用某个应用（用户王大萌 被授权可以使用收银台应用）</li>
+</ul>
+<ul>
+<li><code>Ticket Granting Ticket</code> （TGT） 代表一个已经信任登陆过了的用户，第二次登录的时候，用户不需要输密码，系统会验证请求中的TGT来识别用户是否登录</li>
+</ul>
+<ul>
+<li><code>Ticket Granting Cookie</code>（TGC） 本地存储TGT的Cookie</li>
+<li><code>302</code> http状态码，根据http协议浏览器会自动跳转到响应回的地址</li>
+</ul>
+<p>下面请仔细研读以下官方图表。英文看不懂请自行问翻译软件。</p>
+<p><img src="/images/cas/cas_flow_digarm.png" alt="cas原理图"></p>
+<p>好的，如果你实在费劲，可以看这个简化版的。</p>
+<p> <img src="/images/cas/cas_flow_digarm_simple.jpg" alt="cas大致流程图"></p>
+<p>解释下（括号中表示上图的步骤）：</p>
+<p>用户一定是首先访问内容，所以会首先访问一个应用也就是cas-client（1.）,当访问的是受保护的内容时就需要登录，那么cas-client就会拦截并且将用户通过302跳转（2.）到cas-server,cas-server负责提供登录页面并验证用户是否靠谱（3.）。如果通过则跳转回应用并带上ST（4.），应用收到这个请求就会发起内部一个http请求给cas-server,问它这个ST是你给的吗？（5.），如果ST验证通过则cas-server会回执用户信息给应用（6.）。</p>
+<p>事实上，后续流程是应用就会响应给浏览器sessionId，之后的请求都认为是登录过后的了。</p>
+<p>请再回到官方的flow-diagram细致看下流程。确保你已经了解了整个流程。</p>
+<h3 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h3><p>这里简单复习和介绍下cas涉及到的几个基本概念，以帮助我们更清晰更细节的明白其中的过程。</p>
+<h5 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h5><p>http协议是无状态的，也就是意味着一次连接过后，它就会把一切忘掉，下次再来服务器就不认识客户端了。但是实际上服务端是需要识别用户以提供不同的服务的，这个就催生了cookie。</p>
+<p>cookie，小曲奇饼，下午餐佳品。是存储在客户端的一个小片段内容。</p>
+<ul>
+<li>使用HTTP的Set-Cookie消息头，Web服务器可以指定存储一个cookie</li>
+</ul>
+<ul>
+<li>当一个cookie存在，并且可选条件允许（没有过期，本域名…）的话，该cookie的值会在接下来的每个请求中被发送至服务器。cookie的值被存储在名为Cookie的HTTP消息头中，并且只包含了cookie的值，其它的选项全部被去除。</li>
+</ul>
+<p>大致来说，服务器在http 响应头中set-cookie消息头后，浏览器创建一个cookie，cookie自带一些条件，最基本是哪个域名，如果达到域名，那就不管三七二十一后续的每次请求都带上这个cookie。也就是个参数回传的概念。</p>
+<h5 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h5><p>http协议是无状态的，也就是意味着一次连接过后，它就会把一切忘掉，下次再来服务器不认识客户了。那咋办？cookie啊。cookie是工具，支持你回传参数，但是具体是啥参数呢？为了保持用户访问，一定会通过cookie回传一个识别用户的id。而在服务端，一定需要一个空间来存储用户的操作相关信息。接收到回传后需要识别这个id并将相关信息存储在这个空间里。这就是session。</p>
+<blockquote>
+<p>An HTTP session is a sequence of network request-response transactions. </p>
+<p><a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#HTTP_session" target="_blank" rel="noopener">维基百科</a></p>
+</blockquote>
+<p>所以session有以下特点：</p>
+<ul>
+<li>http的无状态性，服务器识别客户端及其行为</li>
+</ul>
+<ul>
+<li>一般通过cookie保存</li>
+</ul>
+<ul>
+<li>服务器端存储</li>
+</ul>
+<h5 id="HTTP-Status-Code-302"><a href="#HTTP-Status-Code-302" class="headerlink" title="HTTP Status Code 302"></a>HTTP Status Code 302</h5><p>这个状态码大致意思就是浏览器根据响应重发请求到新地址。 <img src="/images/cas/302.png" alt="302跳转"></p>
+<h5 id="Spring-Web-Flow（SWF）"><a href="#Spring-Web-Flow（SWF）" class="headerlink" title="Spring Web Flow（SWF）"></a>Spring Web Flow（SWF）</h5><p>Spring的一个子项目，简化复杂web页面流程的操作，比如，航空订票流程。基本上来说是一个基于web的轻量级流程引擎。</p>
+<p>我们需要注意以下几个点</p>
+<ul>
+<li>与spring mvc 结合，通过配置可以将某个request会被映射给swf来处理</li>
+</ul>
+<ul>
+<li>Xml形式的流程定义</li>
+</ul>
+<ul>
+<li>State，流程定义语言的主要元素<ul>
+<li>Action State  某个后台处理</li>
+<li>View State    显示一个页面</li>
+<li>Subflow State  子流程</li>
+<li>Decision State   根据某个表达式计算得出跳转选项</li>
+<li>End State  结束</li>
+</ul>
+</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>了解了以上cas协议和基本概念之后，我们来看下代码。手上的代码是之前的兄弟checkout出来一直在维护的。最新的代码可以看<a href="https://github.com/apereo/cas/tree/master/cas-server-core-web/src/main/java/org/apereo/cas" target="_blank" rel="noopener">cas的代码仓库</a> 。基本的东西应该都是一致的。</p>
+<p>主要的配置文件：</p>
+<ul>
+<li>swf配置文件：env\ login-webflow.xml，登录流程的SWF定义</li>
+</ul>
+<ul>
+<li>mvc配置文件： cas-servlet.xml 系统性配置，包括SWF与spring集成的配置，各个Controller的bean定义等</li>
+</ul>
+<ul>
+<li>spring配置文件： deployerConfigContext.xml 部分核心业务组件的配置</li>
+</ul>
+<p>登录流程解析：</p>
+<ol>
+<li>boss-starter  : com.yiji.boot.boss.BOSSAutoConfiguration#marmotFilterProxyBean 启动阶段组装相关配置参数到marmot-client </li>
+<li>cas-client ： com.yjf.marmot.filter.MarmotAuthenticationFilter#doFilter 拦截检测到未登录则跳转到登录页面 (http://{marmotUrl}/login)</li>
+<li>cas-server:  cas-servlet.xml:130   login请求被映射到swf处理;login-webflow.xml  按照登录流程执行相关操作，加载登录页面(viewLoginForm)，用户登录触发submit事件继续登录操作，最后redirect并写入st</li>
+</ol>
+<p>组件：</p>
+<ul>
+<li><code>org.jasig.cas.CentralAuthenticationService</code>  单点登录核心处理</li>
+</ul>
+<ul>
+<li><code>org.jasig.cas.authentication.AuthenticationManager</code> 验证登录凭据的流程调度，marmot使用的是<code>org.jasig.cas.authentication.AuthenticationManagerImpl</code></li>
+</ul>
+<ul>
+<li><code>org.jasig.cas.authentication.handler.AuthenticationHandler</code> 具体处理验证的验证组件</li>
+</ul>
+<ul>
+<li><code>org.jasig.cas.authentication.principal.Service</code>  代表需要单点登录的应用</li>
+</ul>
+<ul>
+<li><code>org.jasig.cas.authentication.principal.Credentials</code>凭证，登录信息</li>
+</ul>
+<ul>
+<li><code>org.jasig.cas.ticket.Ticket</code> 票根，st，tgt都继承自它，用户端（浏览器）使用cookie存储，服务端使用缓存（redis）存储，单点登录的核心就是验证两者是否相同</li>
+</ul>
+<ul>
+<li><code>org.jasig.cas.ticket.registry.TicketRegistry</code> 票根注册，存储票根，支持各种存储方式，比如内存中concurrentHashMap,缓存，数据库等</li>
+</ul>
+<p>如果映射到我们通用的开发模式来看， Service、Credentials、Ticket属于模型（DO），TicketRegistry属于数据存储服务(DAO或者Repositroy)，AuthenticationHandler、AuthenticationManager、CentralAuthenticationService 属于业务处理服务（Service或者Manager）</p>
+<p>核心的代码请配合login-webflow.xml 文件的流程定义和CentralAuthenticationService来看代码，需要一点耐心和细心。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>任何一个协议主要都是给机器和系统玩儿的。所以学习cas的原理及实现，最需要的<strong>耐心</strong>。就是一个流程而已，重复看几遍就会懂。代码阅读方面，建议结合可运行的项目来看，需要的是<strong>耐心和细心</strong>。还需要结合cas协议的原来图来讲代码串联起来。</p>
+<hr>
+<p>参考资料：</p>
+<p>cas:</p>
+<p>项目首页：<a href="https://apereo.github.io/cas/" target="_blank" rel="noopener">https://apereo.github.io/cas/</a></p>
+<p>代码仓库：<a href="https://github.com/apereo/cas" target="_blank" rel="noopener">https://github.com/apereo/cas</a></p>
+<p>apereo基金会：<a href="https://www.apereo.org/" target="_blank" rel="noopener">https://www.apereo.org/</a></p>
+<p>cookie:</p>
+<p><a href="http://blog.csdn.net/leo777/article/details/1780299" target="_blank" rel="noopener">http://blog.csdn.net/leo777/article/details/1780299</a></p>
+<p><a href="http://www.dannysite.com/blog/77/" target="_blank" rel="noopener">http://www.dannysite.com/blog/77/</a></p>
+<p><a href="https://www.w3.org/Protocols/rfc2109/rfc2109" target="_blank" rel="noopener">https://www.w3.org/Protocols/rfc2109/rfc2109</a></p>
+<p>session:</p>
+<p><a href="http://lelglin.iteye.com/blog/1906588" target="_blank" rel="noopener">http://lelglin.iteye.com/blog/1906588</a></p>
+<p>http 3xx:</p>
+<p><a href="https://www.w3.org/Protocols/HTTP/1.1/rfc2616bis/draft-lafon-rfc2616bis-latest.html#status.3xx" target="_blank" rel="noopener">https://www.w3.org/Protocols/HTTP/1.1/rfc2616bis/draft-lafon-rfc2616bis-latest.html#status.3xx</a></p>
+<p>swf:</p>
+<p><a href="http://www.ibm.com/developerworks/cn/education/java/j-spring-webflow/" target="_blank" rel="noopener">http://www.ibm.com/developerworks/cn/education/java/j-spring-webflow/</a></p>
+<p><a href="http://www.cnblogs.com/limeiky/p/5275303.html" target="_blank" rel="noopener">http://www.cnblogs.com/limeiky/p/5275303.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://maiz.me/2019/06/20/2016-2016-08-09-cas/" data-id="cjx481hy2001znygwy48en4zf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cas/">cas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分享/">分享</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2016-2016-07-11-programmer-info-collections" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/2016-2016-07-11-programmer-info-collections/" class="article-date">
+  <time datetime="2019-06-20T05:16:56.448Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/2016-2016-07-11-programmer-info-collections/">程序员常用信息网站（持续更新中）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="博客-翻译聚合："><a href="#博客-翻译聚合：" class="headerlink" title="博客/翻译聚合："></a>博客/翻译聚合：</h3><p><a href="http://blog.jobbole.com/" target="_blank" rel="noopener">伯乐在线</a>  <a href="http://www.techug.com/" target="_blank" rel="noopener">程序师</a>  <a href="http://www.webhek.com/" target="_blank" rel="noopener"> web黑客 </a>  <a href="https://juejin.im/" target="_blank" rel="noopener">掘金</a>  <del><a href="http://www.vaikan.com/" target="_blank" rel="noopener">外刊媒体评论</a></del> </p>
+<h3 id="有点深度的技术："><a href="#有点深度的技术：" class="headerlink" title="有点深度的技术："></a>有点深度的技术：</h3><p><a href="http://ifeve.com/" target="_blank" rel="noopener">并发编程网</a>  </p>
+<h3 id="独立博客："><a href="#独立博客：" class="headerlink" title="独立博客："></a>独立博客：</h3><p><a href="http://coolshell.cn/" target="_blank" rel="noopener">酷壳</a>   <a href="http://www.ruanyifeng.com/blog/" target="_blank" rel="noopener">阮一峰</a> <a href="http://bohr.me/" target="_blank" rel="noopener">秋波</a></p>
+<h3 id="问答："><a href="#问答：" class="headerlink" title="问答："></a>问答：</h3><p><a href="http://stackoverflow.com/" target="_blank" rel="noopener">stackoverflow</a>  <a href="https://segmentfault.com/questions" target="_blank" rel="noopener">segmentfault </a></p>
+<h3 id="开源："><a href="#开源：" class="headerlink" title="开源："></a>开源：</h3><p><a href="https://github.com/" target="_blank" rel="noopener">github</a> ：开源代码都在这里了</p>
+<p><a href="http://www.open-open.com/" target="_blank" rel="noopener">open-open</a></p>
+<h3 id="知识库："><a href="#知识库：" class="headerlink" title="知识库："></a>知识库：</h3><p><a href="http://www.w3school.com.cn/" target="_blank" rel="noopener">w3cschool</a>  <a href="https://www.ibm.com/developerworks/cn" target="_blank" rel="noopener">ibm developworks</a></p>
+<h3 id="公开课："><a href="#公开课：" class="headerlink" title="公开课："></a>公开课：</h3><p><a href="http://open.163.com/" target="_blank" rel="noopener">网易</a> <a href="http://open.sina.com.cn/" target="_blank" rel="noopener">新浪</a> <a href="http://mooc.guokr.com/" target="_blank" rel="noopener">慕课</a></p>
+<h3 id="行业领先信息"><a href="#行业领先信息" class="headerlink" title="行业领先信息:"></a>行业领先信息:</h3><p><a href="http://www.infoq.com/cn/" target="_blank" rel="noopener">infoq</a>  <a href="https://www.thoughtworks.com/cn/" target="_blank" rel="noopener">thoughtworks</a></p>
+<h3 id="综合信息："><a href="#综合信息：" class="headerlink" title="综合信息："></a>综合信息：</h3><p><a href="http://www.csdn.net/" target="_blank" rel="noopener">csdn</a>  <a href="http://www.iteye.com/" target="_blank" rel="noopener">iteye</a>  <a href="http://www.cnblogs.com/" target="_blank" rel="noopener">博客园</a> </p>
+<h3 id="前端："><a href="#前端：" class="headerlink" title="前端："></a>前端：</h3><p><a href="https://css-tricks.com/guides/" target="_blank" rel="noopener">css-tricks</a> <a href="http://zh.learnlayout.com/" target="_blank" rel="noopener">css布局</a> <a href="https://developer.mozilla.org/zh-CN/docs/Learn" target="_blank" rel="noopener">MDN</a> </p>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p><a href="https://worktile.com/" target="_blank" rel="noopener">worktile团队协作</a>   <a href="https://pomotodo.com/" target="_blank" rel="noopener">番茄土豆GTD</a></p>
+<p><a href="https://shimo.im/" target="_blank" rel="noopener">石墨文档协作</a> <a href="https://www.mailgun.com/" target="_blank" rel="noopener">mailgun邮件服务</a>  </p>
+<p><a href="http://www.egouz.com/" target="_blank" rel="noopener"> 优秀网站推荐</a>  <a href="http://www.gif5.net/" target="_blank" rel="noopener">gif制作</a>  <a href="http://www.uugai.com/" target="_blank" rel="noopener">logo生成</a></p>
+<p><a href="http://themakers.io/tools/" target="_blank" rel="noopener">maker’s tools工具推荐</a> </p>
+<p><a href="https://ezbytool.com/" target="_blank" rel="noopener">创业者工具箱</a></p>
+<h3 id="网页模板网站"><a href="#网页模板网站" class="headerlink" title="网页模板网站"></a>网页模板网站</h3><p><a href="http://www.cssmoban.com/" target="_blank" rel="noopener">css模板</a>      <a href="http://www.mobanwang.com/" target="_blank" rel="noopener">模板王 </a>   <a href="http://sc.chinaz.com/moban/" target="_blank" rel="noopener">站长模板</a> <a href="http://www.mb5u.com/" target="_blank" rel="noopener">模板无忧</a>   <a href="http://www.mycodes.net/153/" target="_blank" rel="noopener">mycodes</a> <a href="http://www.moke8.com/" target="_blank" rel="noopener">moke8</a>  <a href="http://www.pageadmin.net/moban/" target="_blank" rel="noopener">pageadmin</a></p>
+<p><a href="https://bootswatch.com/3/" target="_blank" rel="noopener">bootswatch</a>  <a href="https://startbootstrap.com/template-categories/all/" target="_blank" rel="noopener">startbootstrap</a></p>
+<h3 id="求职网站"><a href="#求职网站" class="headerlink" title="求职网站"></a>求职网站</h3><p><a href="http://www.zhaopin.com/chongqing/" target="_blank" rel="noopener">智联</a> <a href="http://www.51job.com/chongqing" target="_blank" rel="noopener">前程无忧</a> <a href="http://www.huibo.com/" target="_blank" rel="noopener">汇博</a> <a href="http://www.chinahr.com/chongqing/" target="_blank" rel="noopener">中华英才网</a> <a href="https://www.lagou.com/jobs/list_Java?px=default&city=重庆#filterBox" target="_blank" rel="noopener">拉勾</a>  <a href="https://www.dajie.com/home" target="_blank" rel="noopener">大街</a> <a href="https://www.liepin.com/" target="_blank" rel="noopener">猎聘</a> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://maiz.me/2019/06/20/2016-2016-07-11-programmer-info-collections/" data-id="cjx481hx80007nygwjmcsqavt" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/信息/">信息</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/新手/">新手</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2016-2016-09-08-jQuery" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/2016-2016-09-08-jQuery/" class="article-date">
+  <time datetime="2019-06-20T05:16:56.448Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/2016-2016-09-08-jQuery/">jQuery温故而知新</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>转入新的公司的最初这段时间在备课。当老师果然任重道远，再基础的知识也要细致的梳理。准备前端的时候把jQuery的learning center的文章大体看了下，有些新发现，跟大家分享。</p>
+<h4 id="jQuery是个啥？"><a href="#jQuery是个啥？" class="headerlink" title="jQuery是个啥？"></a>jQuery是个啥？</h4><p>以前就知道它是个很强大的框架，大家都在用。这次发现其实jQuery是个封装版本的js。js不好用的api，他都拿来封装下，再加上程序员的智慧，提供简洁方便的命名和编程方式（比如，chaining）。所以，他不能归类为某个领域，他跟js在同一个领域，啥都可以搞。</p>
+<h4 id="事件冒泡和事件委托"><a href="#事件冒泡和事件委托" class="headerlink" title="事件冒泡和事件委托"></a>事件冒泡和事件委托</h4><p>以前经常遇到一个问题，就是新创建的元素插入到dom中事件就不管用啦，为啥呢？怎么解决呢？含含糊糊这么多年。其实jquery的事件绑定只在它执行的那个瞬间有用，之后添加的是没有的。聪明的john就想到了事件冒泡（event bubling/ event propagation），也就是某个元素的事件被触发以后，事件会向上冒泡，给到他的parent，如此往上直到document root。</p>
+<ul>
+<li>&lt;a&gt;</li>
+<li>&lt;li&gt;</li>
+<li>&lt;ul #list&gt;</li>
+<li>&lt;div #container&gt;</li>
+<li>&lt;body&gt;</li>
+<li>&lt;html&gt;</li>
+<li>document root</li>
+</ul>
+<p>所以，某个元素被点击，就等于他的祖先也会被点击，那么如果监听其parent的点击事件，然后确认是那个孩子惹得祸，就能解决如上的问题了。jQuery 1.7+的方案如下，#list是parent，其下的某个子节点是&lt;a&gt;标签。这就可以说明为，#list下的某个a标签被点击了，不是指向具体的标签了。问题迎刃而解。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Attach a delegated event handler</span></span><br><span class="line">$( <span class="string">"#list"</span> ).on( <span class="string">"click"</span>, <span class="string">"a"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> event </span>) </span>&#123;</span><br><span class="line">    event.preventDefault();</span><br><span class="line">    <span class="built_in">console</span>.log( $( <span class="keyword">this</span> ).text() );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义事件用于解耦"><a href="#自定义事件用于解耦" class="headerlink" title="自定义事件用于解耦"></a>自定义事件用于解耦</h4><p>如下html片段</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&amp;lt;div class="room" id="kitchen"&amp;gt;</span><br><span class="line">    &amp;lt;div class="lightbulb on"&amp;gt;&amp;lt;/div&amp;gt;</span><br><span class="line">    &amp;lt;div class="switch"&amp;gt;&amp;lt;/div&amp;gt;</span><br><span class="line">    &amp;lt;div class="switch"&amp;gt;&amp;lt;/div&amp;gt;</span><br><span class="line">    &amp;lt;div class="clapper"&amp;gt;&amp;lt;/div&amp;gt;</span><br><span class="line">&amp;lt;/div&amp;gt;</span><br></pre></td></tr></table></figure>
+
+<p>一个厨房有个灯（.lightbulb）和几个开关（.switch .clapper），现在要开关灯。两种实现方案：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$( <span class="string">".switch, .clapper"</span> ).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> light = $( <span class="keyword">this</span> ).closest( <span class="string">".room"</span> ).find( <span class="string">".lightbulb"</span> );</span><br><span class="line">    <span class="keyword">if</span> ( light.is( <span class="string">".on"</span> ) ) &#123;</span><br><span class="line">        light.removeClass( <span class="string">"on"</span> ).addClass( <span class="string">"off"</span> );</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        light.removeClass( <span class="string">"off"</span> ).addClass( <span class="string">"on"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$( <span class="string">".lightbulb"</span> ).on( <span class="string">"light:toggle"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> event </span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> light = $( <span class="keyword">this</span> );</span><br><span class="line">    <span class="keyword">if</span> ( light.is( <span class="string">".on"</span> ) ) &#123;</span><br><span class="line">        light.removeClass( <span class="string">"on"</span> ).addClass( <span class="string">"off"</span> );</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        light.removeClass( <span class="string">"off"</span> ).addClass( <span class="string">"on"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">$( <span class="string">".switch, .clapper"</span> ).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> room = $( <span class="keyword">this</span> ).closest( <span class="string">".room"</span> );</span><br><span class="line">    room.find( <span class="string">".lightbulb"</span> ).trigger( <span class="string">"light:toggle"</span> );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>后一种方案创建了一个自定义的light:toggle事件，将事件的触发和处理代码解耦。而且事件处理代码可以复用。这里是一个消费与订阅的模型，也就是事件编程的基本模型。</p>
+<p>事实证明，阅读官方文档非常有必要。 不过jQuery的文档不像写给纯新手看的，要有点基础才得行，而且没有中文。但是看懂实在很爽。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://maiz.me/2019/06/20/2016-2016-09-08-jQuery/" data-id="cjx481hxa0009nygw02wrz0xm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/课程相关/">课程相关</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2016-2016-10-14-blogs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/2016-2016-10-14-blogs/" class="article-date">
+  <time datetime="2019-06-20T05:16:56.447Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/2016-2016-10-14-blogs/">第一批同学们的博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>入行之后就在思考到底怎样才能够给学生们真正有价值的东西。不单是知识，也包括各种理念。其中一个实践就是开始写博客,彼此交流分享。这个算是社区的雏形吧。离开训练期之后，如果能够保持这个习惯，一定会给自己的提升和职业生涯的发展带来很大的帮助。</p>
+<p>立此贴鼓励亲爱的同学，加油。</p>
+<p>廖*   ：<a href="http://blog.csdn.net/qq_23969351/article/details/52810360" target="_blank" rel="noopener">http://blog.csdn.net/qq_23969351/article/details/52810360</a></p>
+<p>刘*来 ：<a href="http://blog.csdn.net/qq_28617497/article/details/52812958" target="_blank" rel="noopener">http://blog.csdn.net/qq_28617497/article/details/52812958</a></p>
+<p>但*勇 ：<a href="http://blog.csdn.net/qq_36389490/article/details/52813952" target="_blank" rel="noopener">http://blog.csdn.net/qq_36389490/article/details/52813952</a></p>
+<p>*湘   ：<a href="http://blog.csdn.net/lxdiana/article/details/52808581" target="_blank" rel="noopener">http://blog.csdn.net/lxdiana/article/details/52808581</a></p>
+<p>张*阳 ：<a href="http://blog.csdn.net/zsyoung" target="_blank" rel="noopener">http://blog.csdn.net/zsyoung</a></p>
+<p>刘*东 ：<a href="http://blog.csdn.net/ljdevils" target="_blank" rel="noopener">http://blog.csdn.net/ljdevils</a></p>
+<p>*郊 ：<a href="http://my.csdn.net/twin_mirror" target="_blank" rel="noopener">http://my.csdn.net/twin_mirror</a></p>
+<p>熊*颖 ：<a href="http://blog.csdn.net/xcycool24/article/details/52815004" target="_blank" rel="noopener">http://blog.csdn.net/xcycool24/article/details/52815004</a></p>
+<p>顾*旭 ：<a href="http://blog.csdn.net/axu_xiatian/article/details/52811051" target="_blank" rel="noopener">http://blog.csdn.net/axu_xiatian/article/details/52811051</a></p>
+<p>封*超 <a href="http://blog.csdn.net/tank461058" target="_blank" rel="noopener">http://blog.csdn.net/tank461058</a></p>
+<p>龙*宇 <a href="http://blog.csdn.net/solidsnake9527" target="_blank" rel="noopener">http://blog.csdn.net/solidsnake9527</a></p>
+<p>李*利 <a href="http://blog.csdn.net/qq_36389107" target="_blank" rel="noopener">http://blog.csdn.net/qq_36389107</a></p>
+<p>*帅 <a href="http://blog.csdn.net/qq_35959015" target="_blank" rel="noopener">http://blog.csdn.net/qq_35959015</a></p>
+<p>*阳 <a href="http://blog.csdn.net/frosro" target="_blank" rel="noopener">http://blog.csdn.net/frosro</a></p>
+<p>施*飞</p>
+<p>李*轩 :<a href="http://blog.csdn.net/administrator0" target="_blank" rel="noopener">http://blog.csdn.net/administrator0</a></p>
+<p>林*杰 :<a href="http://blog.csdn.net/shujie_lin" target="_blank" rel="noopener">http://blog.csdn.net/shujie_lin</a></p>
+<p>胡*祥 :<a href="http://blog.csdn.net/huxx510" target="_blank" rel="noopener">http://blog.csdn.net/huxx510</a></p>
+<p>*信   :<a href="http://blog.csdn.net/snail_xinl" target="_blank" rel="noopener">http://blog.csdn.net/snail_xinl</a></p>
+<p>刘*及 :<a href="http://blog.csdn.net/qq781239913" target="_blank" rel="noopener">http://blog.csdn.net/qq781239913</a></p>
+<p>黄*玲 :<a href="http://blog.csdn.net/qq_36389108" target="_blank" rel="noopener">http://blog.csdn.net/qq_36389108</a></p>
+<p>*剑   ：<a href="http://blog.csdn.net/zailushang6666" target="_blank" rel="noopener">http://blog.csdn.net/zailushang6666</a></p>
+<p>*鑫   ：<a href="http://blog.csdn.net/xinshen8" target="_blank" rel="noopener">http://blog.csdn.net/xinshen8</a>     </p>
+<p>*森   ：<a href="http://blog.csdn.net/jetvae" target="_blank" rel="noopener">http://blog.csdn.net/jetvae</a></p>
+<p>陈*建 ：<a href="http://blog.csdn.net/langzai2908" target="_blank" rel="noopener">http://blog.csdn.net/langzai2908</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://maiz.me/2019/06/20/2016-2016-10-14-blogs/" data-id="cjx481hxc000anygw6e5twksz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/training/">training</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aliyun/">aliyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/archetype/">archetype</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cas/">cas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logback/">logback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/training/">training</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version-control/">version control</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信息/">信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分享/">分享</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思考/">思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新手/">新手</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板方法/">模板方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程相关/">课程相关</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/archetype/" style="font-size: 10px;">archetype</a> <a href="/tags/cas/" style="font-size: 10px;">cas</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/training/" style="font-size: 10px;">training</a> <a href="/tags/version-control/" style="font-size: 10px;">version control</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/信息/" style="font-size: 10px;">信息</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/工作/" style="font-size: 20px;">工作</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/思考/" style="font-size: 10px;">思考</a> <a href="/tags/总结/" style="font-size: 15px;">总结</a> <a href="/tags/技术/" style="font-size: 15px;">技术</a> <a href="/tags/教程/" style="font-size: 15px;">教程</a> <a href="/tags/新手/" style="font-size: 15px;">新手</a> <a href="/tags/模板方法/" style="font-size: 10px;">模板方法</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/课程相关/" style="font-size: 10px;">课程相关</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a> <a href="/tags/阿里云/" style="font-size: 10px;">阿里云</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/20/2019-2019-05-28-git-usage/">git的简单使用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/20/2017-2017-09-06-spring-logback/">spring与logback集成的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/20/2017-2017-04-20-vim-tutorial/">vim简单教程</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/20/2017-2017-09-12-aliyun-init/">阿里云服务器环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/20/2017-2017-09-13-ssm-archetype/">自定义SSM集成的archetype</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 lucas<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

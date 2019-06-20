@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>2013我遇到bug和成长 | 一粒麦子</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="两年多的工作经验，从白丁到熟练工，不断的成长。 2013年的成长，主要在我独立负责了一个功能模块中遇到的各种问题。这些问题也促使我去思考——怎样才能设计出可用，健壮的系统呢？ 都不是什么高大上，列举主要是给自己 备个份，也让跟咱一个阶段的同学们作为借鉴。 ###1. 网络异常处理 公司使用SOA的架构，我所在的系统是业务系统，所以涉及到很多的基于webService的服务调用。自然也就会带来网络异">
+<meta name="keywords" content="总结,工作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2013我遇到bug和成长">
+<meta property="og:url" content="http://maiz.me/2019/06/20/2014-2014-01-24-2013我遇到bug和成长/index.html">
+<meta property="og:site_name" content="一粒麦子">
+<meta property="og:description" content="两年多的工作经验，从白丁到熟练工，不断的成长。 2013年的成长，主要在我独立负责了一个功能模块中遇到的各种问题。这些问题也促使我去思考——怎样才能设计出可用，健壮的系统呢？ 都不是什么高大上，列举主要是给自己 备个份，也让跟咱一个阶段的同学们作为借鉴。 ###1. 网络异常处理 公司使用SOA的架构，我所在的系统是业务系统，所以涉及到很多的基于webService的服务调用。自然也就会带来网络异">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-20T05:16:56.441Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2013我遇到bug和成长">
+<meta name="twitter:description" content="两年多的工作经验，从白丁到熟练工，不断的成长。 2013年的成长，主要在我独立负责了一个功能模块中遇到的各种问题。这些问题也促使我去思考——怎样才能设计出可用，健壮的系统呢？ 都不是什么高大上，列举主要是给自己 备个份，也让跟咱一个阶段的同学们作为借鉴。 ###1. 网络异常处理 公司使用SOA的架构，我所在的系统是业务系统，所以涉及到很多的基于webService的服务调用。自然也就会带来网络异">
+  
+    <link rel="alternate" href="/atom.xml" title="一粒麦子" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">一粒麦子</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://maiz.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2014-2014-01-24-2013我遇到bug和成长" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/2014-2014-01-24-2013我遇到bug和成长/" class="article-date">
+  <time datetime="2019-06-20T05:16:56.441Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2013我遇到bug和成长
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>两年多的工作经验，从白丁到熟练工，不断的成长。</p>
+<p>2013年的成长，主要在我独立负责了一个功能模块中遇到的各种问题。这些问题也促使我去思考——怎样才能设计出可用，健壮的系统呢？</p>
+<p>都不是什么高大上，列举主要是给自己 备个份，也让跟咱一个阶段的同学们作为借鉴。</p>
+<p>###1. 网络异常处理</p>
+<p>公司使用SOA的架构，我所在的系统是业务系统，所以涉及到很多的基于webService的服务调用。自然也就会带来网络异常的情况。第一个版本没有进行过异常的处理，后果是，业务处理的请求已经发出，在等待接收的时候超时，直接将记录设为失败，但当服务端却将业务处理成成功时，就造成了状态的不一致，实际上反映在我的业务里就是没有收用户钱，却帮用户缴了费。</p>
+<p>这个点上的问题，其实反映出的是对于异常的处理。异常处理，往往也是需要去领悟，有这个意识。目前除了业务特定的异常，能够想到的是网络和数据库的异常，需要考虑。但是这一类的往往也只能做些补偿的方式。</p>
+<p>[困惑]如何合理的看待异常，为异常情况做的事情在设计里可以占多少比重？</p>
+<p>###2. 字段设计过短：外部流水号，用户姓名</p>
+<ul>
+<li><p>我们系统存储了外部的流水号，当外部流水号发生变动时，我们的数据库就无法处理，结果就是业务失败。</p>
+</li>
+<li><p>用户姓名设计时，只考虑了个人的用户，当时实际上是有企业用户的，企业用户的名字很长，也就导致了字段过短。</p>
+</li>
+</ul>
+<p>这两个事情，反映出的问题有些不同。#1系统对于外部的东西，也就是不可控的部分，需要特别的审慎，一方面是要约定好，尽早校验，不正确的就不接收，另一方面在条件允许的情况下，存储尽量放宽。#2问题在于对于业务不熟，或者说不够精细。总结来说，就是在做数据库设计的时候，思考的不够深入，没有对于每个字段去考虑用在哪些场景，有哪些变数。归根到底，思维量减少bug量。</p>
+<p>###3.幂等性校验：重复提交的防止和处理</p>
+<p>重复提交遇到了两个情况</p>
+<ul>
+<li><p>自己的系统没有对交易做重复提交的处理，用户在网速慢的情况下点了两下，就提交了两笔交易，都是涉及钱的事情，问题也就很严重。</p>
+</li>
+<li><p>公司使用了负载均衡，但是这个LB本身存在bug，将同一个请求转发了两次。这种极端情况下，我们的幂等性校验将重复的记录算作失败，而失败的结果又优先返回给了用户，导致了用户状态是失败，而实际交易还在处理中。</p>
+</li>
+</ul>
+<p>问题在于重复提交是一类问题，需要有一个标识保证不重复，有页面可以使用每个请求不同的token解决，单纯的接口每次请求外部传入唯一的流水号，来进行校验。但是也需要注意的是，同样地请求要返回尽量相同的结果，不要粗暴的处理失败。这也是在细节上的思考。</p>
+<p>###4. 系统关键部分的处理：流水号生成策略；状态变更（没有数据时的处理，未知状态处理）</p>
+<p>系统的关键部分是绝对不能出错的，一旦出错业务铁定出错。</p>
+<p>比如流水号生成策略，是基于时间的，但是一旦量大，出现并发，就会重复。而一旦重复依据此流水号做的动作就是出错了。一个解决方案是基于数据库的ID，保证不会重复。</p>
+<p>这个方面另一个案例是状态的变更，假设业务有三个状态，[成功，失败，处理中]，当出现网络异常时就将记录记成[处理中]，然后去查询另一个系统，当对方的系统里没有记录时就认为是业务没有执行，回来将记录改成[失败]，这个状态流转在业务执行很慢或者数据库出问题，没有插入数据的时候就会出问题了。这个问题的勉强的解决方案是多次查询，然后人工来介入决定状态。</p>
+<p>系统的关键部分，应该在设计的初期分析出来，然后深入思考保证不出问题。当然，分析本身也是经验和功力的积累。</p>
+<p>###5. 包版本不匹配：沟通问题，分支打facade包</p>
+<ul>
+<li>公司用maven作为依赖管理工具，前期经常出现的，是线下测试OK，上线，却报unmashalling的错，大部分情况是其他系统换了版本，没有及时告知。</li>
+<li>但是遇到一次奇葩的问题是，版本是一致的，把线上包拉下来反编译，发现都是一致的，却还是报unmarshalling。后来发现，是spring配置的里面有两个同样的bean的id，导致服务都没发布出去。</li>
+<li>另一个问题是，版本管理没做到引起的，同时两个分支在开发，某一个分支修改了对外的接口参数，然后合主干，发接口包，调用方集成了该接口包，之后另一个分支在合主干前发布了接口包，此接口包没有之前分支的修改，调用方再次集成此接口包，就失去了之前的接口修改，然后该分支合到主干，打包上线，就造成了本系统有之前分支的修改，而调用方没有，线上报unmarshalling错。正确做法是：先合分支到主干，然后发布接口包，保证外部集成的是主干的代码</li>
+</ul>
+<p>###6. 设计不合理:垃圾费合并缴费存储的；补缴的设计</p>
+<p>随着时间推移，我开始负责一些系统，也开始感受什么叫设计。很多时候是辨析事情的本质，找到事物的本源，照其原来的样子来设计模型。</p>
+<p>我负责的系统里犯了两个错误。</p>
+<p>我所在的城市规定垃圾处置费由燃气公司代收，燃气公司收费时又规定，要合并收取。合并收取，这样的规则是在系统第一版本完成后增加的。但是时间很紧的情况下没有很好的思考，而是直接在原有记录上，将合并前的多条记录的金额都存储成合并后的金额。这个失误给后续统计金额留下了个坑。后头经过思考，发现，这种合并缴费的情况改变了每次缴费和缴纳的月份之间的关系，从1:1，变为了1：n，就引入了缴费记录和缴费项的不同概念；</p>
+<p>另一个是在缴费前期，认为一次用户缴费请求，只会有一次缴费；当pd提出补缴功能时，我在原有模型上加入了补缴的项目，与缴费表共存。导致了很多问题。后期思考过程中发现，原来用户的缴费请求和缴费执行可以作为分开的概念，一次请求可以有多次缴费。这样就合理了。</p>
+<p>实际上， 我所犯的错误都是常识性的，如果足够的小心，加上高人的指点，可以避免。但是我还是很珍惜这些bug，掉进坑里，才能感受其中的暗无天日。</p>
+<p>希望2014年更多成长，可以有bug，但要犯点高级的，不要重复犯错。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://maiz.me/2019/06/20/2014-2014-01-24-2013我遇到bug和成长/" data-id="cjx481hx20002nygwznk9cxz6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工作/">工作</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/20/2015-2015-02-07-2014年我经历的项目和学习/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2014年我经历的项目和学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/20/2014-2014-02-19-我学到的Linux命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">我学到的Linux命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aliyun/">aliyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/archetype/">archetype</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cas/">cas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logback/">logback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/training/">training</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version-control/">version control</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信息/">信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分享/">分享</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思考/">思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新手/">新手</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板方法/">模板方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程相关/">课程相关</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/archetype/" style="font-size: 10px;">archetype</a> <a href="/tags/cas/" style="font-size: 10px;">cas</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/training/" style="font-size: 10px;">training</a> <a href="/tags/version-control/" style="font-size: 10px;">version control</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/信息/" style="font-size: 10px;">信息</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/工作/" style="font-size: 20px;">工作</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/思考/" style="font-size: 10px;">思考</a> <a href="/tags/总结/" style="font-size: 15px;">总结</a> <a href="/tags/技术/" style="font-size: 15px;">技术</a> <a href="/tags/教程/" style="font-size: 15px;">教程</a> <a href="/tags/新手/" style="font-size: 15px;">新手</a> <a href="/tags/模板方法/" style="font-size: 10px;">模板方法</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/课程相关/" style="font-size: 10px;">课程相关</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a> <a href="/tags/阿里云/" style="font-size: 10px;">阿里云</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/20/2019-2019-05-28-git-usage/">git的简单使用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/20/2017-2017-09-06-spring-logback/">spring与logback集成的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/20/2017-2017-04-20-vim-tutorial/">vim简单教程</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/20/2017-2017-09-12-aliyun-init/">阿里云服务器环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/20/2017-2017-09-13-ssm-archetype/">自定义SSM集成的archetype</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 lucas<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

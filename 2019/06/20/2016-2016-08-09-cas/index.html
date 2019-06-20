@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>cas协议及实现分享 | 一粒麦子</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="概念SSO： Single sign-on 一系列相关但独立的系统之间的访问控制属性。通过支持该属性，用户可以使用一个用户ID和密码登录到相关联的系统或者无缝的登录到各系统。（维基百科 麦子译） 简单说就是在一处登陆就可以访问一系列相关的系统 CAS：作为项目：apereo基金会下的一个项目，提供企业级SSO解决方案；作为协议：a simple and powerful ticket-based">
+<meta name="keywords" content="技术,cas,分享">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cas协议及实现分享">
+<meta property="og:url" content="http://maiz.me/2019/06/20/2016-2016-08-09-cas/index.html">
+<meta property="og:site_name" content="一粒麦子">
+<meta property="og:description" content="概念SSO： Single sign-on 一系列相关但独立的系统之间的访问控制属性。通过支持该属性，用户可以使用一个用户ID和密码登录到相关联的系统或者无缝的登录到各系统。（维基百科 麦子译） 简单说就是在一处登陆就可以访问一系列相关的系统 CAS：作为项目：apereo基金会下的一个项目，提供企业级SSO解决方案；作为协议：a simple and powerful ticket-based">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://maiz.me/images/cas/cas_architecture.png">
+<meta property="og:image" content="http://maiz.me/images/cas/cas_flow_digarm.png">
+<meta property="og:image" content="http://maiz.me/images/cas/cas_flow_digarm_simple.jpg">
+<meta property="og:image" content="http://maiz.me/images/cas/302.png">
+<meta property="og:updated_time" content="2019-06-20T05:16:56.449Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cas协议及实现分享">
+<meta name="twitter:description" content="概念SSO： Single sign-on 一系列相关但独立的系统之间的访问控制属性。通过支持该属性，用户可以使用一个用户ID和密码登录到相关联的系统或者无缝的登录到各系统。（维基百科 麦子译） 简单说就是在一处登陆就可以访问一系列相关的系统 CAS：作为项目：apereo基金会下的一个项目，提供企业级SSO解决方案；作为协议：a simple and powerful ticket-based">
+<meta name="twitter:image" content="http://maiz.me/images/cas/cas_architecture.png">
+  
+    <link rel="alternate" href="/atom.xml" title="一粒麦子" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">一粒麦子</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://maiz.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2016-2016-08-09-cas" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/2016-2016-08-09-cas/" class="article-date">
+  <time datetime="2019-06-20T05:16:56.449Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      cas协议及实现分享
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>SSO： Single sign-on 一系列相关但独立的系统之间的访问控制属性。通过支持该属性，用户可以使用一个用户ID和密码登录到相关联的系统或者无缝的登录到各系统。（<a href="https://en.wikipedia.org/wiki/Single_sign-on" target="_blank" rel="noopener">维基百科</a> 麦子译）</p>
+<p>简单说就是在一处登陆就可以访问一系列相关的系统</p>
+<p>CAS：作为项目：<a href="https://www.apereo.org/content/about" target="_blank" rel="noopener">apereo基金会</a>下的一个项目，提供企业级SSO解决方案；作为协议：a simple and powerful ticket-based protocol developed exclusively for （PROEJCT） CAS.</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><h5 id="1-总体架构"><a href="#1-总体架构" class="headerlink" title="1.总体架构"></a>1.总体架构</h5><p>既然解决的是单点登录的问题，那么就会存在一堆需要单点登录的应用。CAS的解决方案中，登陆这件事情被集中放在统一的登陆服务上处理，各个应用将用户引导到这个服务去处理，处理完之后再跳回本应用。为此，各个应用需要具备识别是否登陆、引导用户跳转、接受等候跳转的功能。这些功能都是重复的，所以考虑到每个应用包含一个客户端来处理。</p>
+<p>另一方面，作为一个流行的单点登录解决方案，需要考虑支持多种协议多种客户端各种验证方式等等。</p>
+<p>所以就有了以下这张架构图：</p>
+<p> <img src="/images/cas/cas_architecture.png" alt="cas_architecture"></p>
+<h5 id="2-大体流程"><a href="#2-大体流程" class="headerlink" title="2.大体流程"></a>2.大体流程</h5><p> 关于单点登陆的流程<a href="https://apereo.github.io/cas/4.2.x/protocol/CAS-Protocol.html" target="_blank" rel="noopener">官方的流程图</a>已经非常能够说明问题了。需要的是一点<strong>耐心和细心</strong>。</p>
+<p>解释下图中角色：User=用户，Browser=浏览器，CAS Server=负责登录的服务端，Protected APP = 一个需要单点登录的应用，Protected App #2=另一个需要单点登录的应用，区别在于，图中演示的第一步是需要用户输用户名密码登录到第一个应用，之后登录APP #2是不需要用户输用户名密码的，直接按照协议系统自动登录。</p>
+<p>再解释下cas协议定义或者使用到的几个关键概念：</p>
+<ul>
+<li><code>Service Ticket</code>（ST）   代表一个用户被授权使用某个应用（用户王大萌 被授权可以使用收银台应用）</li>
+</ul>
+<ul>
+<li><code>Ticket Granting Ticket</code> （TGT） 代表一个已经信任登陆过了的用户，第二次登录的时候，用户不需要输密码，系统会验证请求中的TGT来识别用户是否登录</li>
+</ul>
+<ul>
+<li><code>Ticket Granting Cookie</code>（TGC） 本地存储TGT的Cookie</li>
+<li><code>302</code> http状态码，根据http协议浏览器会自动跳转到响应回的地址</li>
+</ul>
+<p>下面请仔细研读以下官方图表。英文看不懂请自行问翻译软件。</p>
+<p><img src="/images/cas/cas_flow_digarm.png" alt="cas原理图"></p>
+<p>好的，如果你实在费劲，可以看这个简化版的。</p>
+<p> <img src="/images/cas/cas_flow_digarm_simple.jpg" alt="cas大致流程图"></p>
+<p>解释下（括号中表示上图的步骤）：</p>
+<p>用户一定是首先访问内容，所以会首先访问一个应用也就是cas-client（1.）,当访问的是受保护的内容时就需要登录，那么cas-client就会拦截并且将用户通过302跳转（2.）到cas-server,cas-server负责提供登录页面并验证用户是否靠谱（3.）。如果通过则跳转回应用并带上ST（4.），应用收到这个请求就会发起内部一个http请求给cas-server,问它这个ST是你给的吗？（5.），如果ST验证通过则cas-server会回执用户信息给应用（6.）。</p>
+<p>事实上，后续流程是应用就会响应给浏览器sessionId，之后的请求都认为是登录过后的了。</p>
+<p>请再回到官方的flow-diagram细致看下流程。确保你已经了解了整个流程。</p>
+<h3 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h3><p>这里简单复习和介绍下cas涉及到的几个基本概念，以帮助我们更清晰更细节的明白其中的过程。</p>
+<h5 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h5><p>http协议是无状态的，也就是意味着一次连接过后，它就会把一切忘掉，下次再来服务器就不认识客户端了。但是实际上服务端是需要识别用户以提供不同的服务的，这个就催生了cookie。</p>
+<p>cookie，小曲奇饼，下午餐佳品。是存储在客户端的一个小片段内容。</p>
+<ul>
+<li>使用HTTP的Set-Cookie消息头，Web服务器可以指定存储一个cookie</li>
+</ul>
+<ul>
+<li>当一个cookie存在，并且可选条件允许（没有过期，本域名…）的话，该cookie的值会在接下来的每个请求中被发送至服务器。cookie的值被存储在名为Cookie的HTTP消息头中，并且只包含了cookie的值，其它的选项全部被去除。</li>
+</ul>
+<p>大致来说，服务器在http 响应头中set-cookie消息头后，浏览器创建一个cookie，cookie自带一些条件，最基本是哪个域名，如果达到域名，那就不管三七二十一后续的每次请求都带上这个cookie。也就是个参数回传的概念。</p>
+<h5 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h5><p>http协议是无状态的，也就是意味着一次连接过后，它就会把一切忘掉，下次再来服务器不认识客户了。那咋办？cookie啊。cookie是工具，支持你回传参数，但是具体是啥参数呢？为了保持用户访问，一定会通过cookie回传一个识别用户的id。而在服务端，一定需要一个空间来存储用户的操作相关信息。接收到回传后需要识别这个id并将相关信息存储在这个空间里。这就是session。</p>
+<blockquote>
+<p>An HTTP session is a sequence of network request-response transactions. </p>
+<p><a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#HTTP_session" target="_blank" rel="noopener">维基百科</a></p>
+</blockquote>
+<p>所以session有以下特点：</p>
+<ul>
+<li>http的无状态性，服务器识别客户端及其行为</li>
+</ul>
+<ul>
+<li>一般通过cookie保存</li>
+</ul>
+<ul>
+<li>服务器端存储</li>
+</ul>
+<h5 id="HTTP-Status-Code-302"><a href="#HTTP-Status-Code-302" class="headerlink" title="HTTP Status Code 302"></a>HTTP Status Code 302</h5><p>这个状态码大致意思就是浏览器根据响应重发请求到新地址。 <img src="/images/cas/302.png" alt="302跳转"></p>
+<h5 id="Spring-Web-Flow（SWF）"><a href="#Spring-Web-Flow（SWF）" class="headerlink" title="Spring Web Flow（SWF）"></a>Spring Web Flow（SWF）</h5><p>Spring的一个子项目，简化复杂web页面流程的操作，比如，航空订票流程。基本上来说是一个基于web的轻量级流程引擎。</p>
+<p>我们需要注意以下几个点</p>
+<ul>
+<li>与spring mvc 结合，通过配置可以将某个request会被映射给swf来处理</li>
+</ul>
+<ul>
+<li>Xml形式的流程定义</li>
+</ul>
+<ul>
+<li>State，流程定义语言的主要元素<ul>
+<li>Action State  某个后台处理</li>
+<li>View State    显示一个页面</li>
+<li>Subflow State  子流程</li>
+<li>Decision State   根据某个表达式计算得出跳转选项</li>
+<li>End State  结束</li>
+</ul>
+</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>了解了以上cas协议和基本概念之后，我们来看下代码。手上的代码是之前的兄弟checkout出来一直在维护的。最新的代码可以看<a href="https://github.com/apereo/cas/tree/master/cas-server-core-web/src/main/java/org/apereo/cas" target="_blank" rel="noopener">cas的代码仓库</a> 。基本的东西应该都是一致的。</p>
+<p>主要的配置文件：</p>
+<ul>
+<li>swf配置文件：env\ login-webflow.xml，登录流程的SWF定义</li>
+</ul>
+<ul>
+<li>mvc配置文件： cas-servlet.xml 系统性配置，包括SWF与spring集成的配置，各个Controller的bean定义等</li>
+</ul>
+<ul>
+<li>spring配置文件： deployerConfigContext.xml 部分核心业务组件的配置</li>
+</ul>
+<p>登录流程解析：</p>
+<ol>
+<li>boss-starter  : com.yiji.boot.boss.BOSSAutoConfiguration#marmotFilterProxyBean 启动阶段组装相关配置参数到marmot-client </li>
+<li>cas-client ： com.yjf.marmot.filter.MarmotAuthenticationFilter#doFilter 拦截检测到未登录则跳转到登录页面 (http://{marmotUrl}/login)</li>
+<li>cas-server:  cas-servlet.xml:130   login请求被映射到swf处理;login-webflow.xml  按照登录流程执行相关操作，加载登录页面(viewLoginForm)，用户登录触发submit事件继续登录操作，最后redirect并写入st</li>
+</ol>
+<p>组件：</p>
+<ul>
+<li><code>org.jasig.cas.CentralAuthenticationService</code>  单点登录核心处理</li>
+</ul>
+<ul>
+<li><code>org.jasig.cas.authentication.AuthenticationManager</code> 验证登录凭据的流程调度，marmot使用的是<code>org.jasig.cas.authentication.AuthenticationManagerImpl</code></li>
+</ul>
+<ul>
+<li><code>org.jasig.cas.authentication.handler.AuthenticationHandler</code> 具体处理验证的验证组件</li>
+</ul>
+<ul>
+<li><code>org.jasig.cas.authentication.principal.Service</code>  代表需要单点登录的应用</li>
+</ul>
+<ul>
+<li><code>org.jasig.cas.authentication.principal.Credentials</code>凭证，登录信息</li>
+</ul>
+<ul>
+<li><code>org.jasig.cas.ticket.Ticket</code> 票根，st，tgt都继承自它，用户端（浏览器）使用cookie存储，服务端使用缓存（redis）存储，单点登录的核心就是验证两者是否相同</li>
+</ul>
+<ul>
+<li><code>org.jasig.cas.ticket.registry.TicketRegistry</code> 票根注册，存储票根，支持各种存储方式，比如内存中concurrentHashMap,缓存，数据库等</li>
+</ul>
+<p>如果映射到我们通用的开发模式来看， Service、Credentials、Ticket属于模型（DO），TicketRegistry属于数据存储服务(DAO或者Repositroy)，AuthenticationHandler、AuthenticationManager、CentralAuthenticationService 属于业务处理服务（Service或者Manager）</p>
+<p>核心的代码请配合login-webflow.xml 文件的流程定义和CentralAuthenticationService来看代码，需要一点耐心和细心。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>任何一个协议主要都是给机器和系统玩儿的。所以学习cas的原理及实现，最需要的<strong>耐心</strong>。就是一个流程而已，重复看几遍就会懂。代码阅读方面，建议结合可运行的项目来看，需要的是<strong>耐心和细心</strong>。还需要结合cas协议的原来图来讲代码串联起来。</p>
+<hr>
+<p>参考资料：</p>
+<p>cas:</p>
+<p>项目首页：<a href="https://apereo.github.io/cas/" target="_blank" rel="noopener">https://apereo.github.io/cas/</a></p>
+<p>代码仓库：<a href="https://github.com/apereo/cas" target="_blank" rel="noopener">https://github.com/apereo/cas</a></p>
+<p>apereo基金会：<a href="https://www.apereo.org/" target="_blank" rel="noopener">https://www.apereo.org/</a></p>
+<p>cookie:</p>
+<p><a href="http://blog.csdn.net/leo777/article/details/1780299" target="_blank" rel="noopener">http://blog.csdn.net/leo777/article/details/1780299</a></p>
+<p><a href="http://www.dannysite.com/blog/77/" target="_blank" rel="noopener">http://www.dannysite.com/blog/77/</a></p>
+<p><a href="https://www.w3.org/Protocols/rfc2109/rfc2109" target="_blank" rel="noopener">https://www.w3.org/Protocols/rfc2109/rfc2109</a></p>
+<p>session:</p>
+<p><a href="http://lelglin.iteye.com/blog/1906588" target="_blank" rel="noopener">http://lelglin.iteye.com/blog/1906588</a></p>
+<p>http 3xx:</p>
+<p><a href="https://www.w3.org/Protocols/HTTP/1.1/rfc2616bis/draft-lafon-rfc2616bis-latest.html#status.3xx" target="_blank" rel="noopener">https://www.w3.org/Protocols/HTTP/1.1/rfc2616bis/draft-lafon-rfc2616bis-latest.html#status.3xx</a></p>
+<p>swf:</p>
+<p><a href="http://www.ibm.com/developerworks/cn/education/java/j-spring-webflow/" target="_blank" rel="noopener">http://www.ibm.com/developerworks/cn/education/java/j-spring-webflow/</a></p>
+<p><a href="http://www.cnblogs.com/limeiky/p/5275303.html" target="_blank" rel="noopener">http://www.cnblogs.com/limeiky/p/5275303.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://maiz.me/2019/06/20/2016-2016-08-09-cas/" data-id="cjx481hy2001znygwy48en4zf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cas/">cas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分享/">分享</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/20/2017-2017-07-17-eclipse-houtkeys/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          eclipse常用快捷键
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/20/2016-2016-07-11-programmer-info-collections/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">程序员常用信息网站（持续更新中）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aliyun/">aliyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/archetype/">archetype</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cas/">cas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logback/">logback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/training/">training</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/version-control/">version control</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信息/">信息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分享/">分享</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作/">工作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思考/">思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新手/">新手</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板方法/">模板方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程相关/">课程相关</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/archetype/" style="font-size: 10px;">archetype</a> <a href="/tags/cas/" style="font-size: 10px;">cas</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/training/" style="font-size: 10px;">training</a> <a href="/tags/version-control/" style="font-size: 10px;">version control</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/信息/" style="font-size: 10px;">信息</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/工作/" style="font-size: 20px;">工作</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/思考/" style="font-size: 10px;">思考</a> <a href="/tags/总结/" style="font-size: 15px;">总结</a> <a href="/tags/技术/" style="font-size: 15px;">技术</a> <a href="/tags/教程/" style="font-size: 15px;">教程</a> <a href="/tags/新手/" style="font-size: 15px;">新手</a> <a href="/tags/模板方法/" style="font-size: 10px;">模板方法</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/课程相关/" style="font-size: 10px;">课程相关</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a> <a href="/tags/阿里云/" style="font-size: 10px;">阿里云</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/20/2019-2019-05-28-git-usage/">git的简单使用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/20/2017-2017-09-06-spring-logback/">spring与logback集成的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/20/2017-2017-04-20-vim-tutorial/">vim简单教程</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/20/2017-2017-09-12-aliyun-init/">阿里云服务器环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/20/2017-2017-09-13-ssm-archetype/">自定义SSM集成的archetype</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 lucas<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
