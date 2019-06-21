@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="一粒麦子|麦子的博客">
+    <meta name="keyword" content="java">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        SQL优化原理及实践 - 一粒麦子 | 麦子的博客
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 落在地里死了，才能结出新的子粒 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/images/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>lucas</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL优化原理及实践"><span class="toc-text">SQL优化原理及实践</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、优化原则"><span class="toc-text">一、优化原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、实践"><span class="toc-text">二、实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#表设计"><span class="toc-text">表设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#尽量使用索引"><span class="toc-text">尽量使用索引</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-谨慎合理的添加索引"><span class="toc-text">1 谨慎合理的添加索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-提高索引的覆盖率"><span class="toc-text">2 提高索引的覆盖率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-索引使用需要注意的事项"><span class="toc-text">3 索引使用需要注意的事项</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#尽量使用查询缓存"><span class="toc-text">尽量使用查询缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 落在地里死了，才能结出新的子粒 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        SQL优化原理及实践
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-06-21 16:53:34</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#sql优化" title="sql优化">sql优化</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="SQL优化原理及实践"><a href="#SQL优化原理及实践" class="headerlink" title="SQL优化原理及实践"></a>SQL优化原理及实践</h1><p>[TOC]</p>
+<p>数据库作为系统数据存储组件是应用不可缺少的一部分。对数据库操作的的SQL性能对程序的影响也是很大的。这篇博客主要是综合网上的资料，尝试系统的阐述SQL优化的原则及实践方式。囿于笔者的技术水平，有出入之处还请海涵和指出。文末附有参考文章，感谢作者的付出。</p>
+<h2 id="一、优化原则"><a href="#一、优化原则" class="headerlink" title="一、优化原则"></a>一、优化原则</h2><p><img src="/images/sql-optimize/io-pref.gif" alt="IO性能"></p>
+<p>从图上可以看到基本上每种设备都有两个指标：</p>
+<p>延时（响应时间）：表示硬件的突发处理能力；</p>
+<p>带宽（吞吐量）：代表硬件持续处理能力。</p>
+<p>从上图可以看出，计算机系统硬件性能从高到代依次为：</p>
+<p><em>CPU</em>——<em>Cache(L1-L2-L3)</em>——内存——<em>SSD</em>硬盘——网络——硬盘</p>
+<p>所以优化的效果是反向的，减少磁盘的访问量，会显著提升系统性能。</p>
+<p><img src="/images/sql-optimize/optimize-rule.gif" alt="优化原则受益"></p>
+<table>
+<thead>
+<tr>
+<th><strong>优化法则</strong></th>
+<th><strong>性能提升效果</strong></th>
+<th><strong>优化成本</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>减少数据访问</td>
+<td><em>1~1000</em></td>
+<td>低</td>
+</tr>
+<tr>
+<td>返回更少数据</td>
+<td><em>1~100</em></td>
+<td>低</td>
+</tr>
+<tr>
+<td>减少交互次数</td>
+<td><em>1~20</em></td>
+<td>低</td>
+</tr>
+<tr>
+<td>减少服务器<em>CPU</em>开销</td>
+<td><em>1~5</em></td>
+<td>低</td>
+</tr>
+<tr>
+<td>利用更多资源</td>
+<td><em>@~10</em></td>
+<td>高</td>
+</tr>
+</tbody></table>
+<p>这个优化法则归纳为<em>5</em>个层次：</p>
+<ol>
+<li>减少数据访问<ul>
+<li>创建并正确的使用索引</li>
+<li>优化SQL执行计划</li>
+</ul>
+</li>
+<li>返回更少的数据<ul>
+<li>分页</li>
+<li>只返回必要的字段(不使用 select * ；拆分大字段)</li>
+</ul>
+</li>
+<li>减少交互次数<ul>
+<li>使用JDBC的batch方法处理</li>
+<li>用in合并多条sql</li>
+<li>适当的使用存储过程</li>
+</ul>
+</li>
+<li>减少CPU运算<ul>
+<li>使用绑定变量(JDBC中的PreparedStatement)</li>
+<li>谨慎的进行大记录集排序</li>
+<li>减少比较操作<ul>
+<li>用搜索代替like</li>
+<li>不能使用索引定位的大量In List</li>
+</ul>
+</li>
+<li>尽量不要在数据库做运算：cpu计算请移至业务层.</li>
+</ul>
+</li>
+<li>利用更多资源<ul>
+<li>客户端多进程访问</li>
+<li>数据库并行处理</li>
+</ul>
+</li>
+</ol>
+<h2 id="二、实践"><a href="#二、实践" class="headerlink" title="二、实践"></a>二、实践</h2><h3 id="表设计"><a href="#表设计" class="headerlink" title="表设计"></a>表设计</h3><ul>
+<li>控制单表数据量：单表记录控制在1000w行.（也可以考虑分区）</li>
+<li>控制列数量：单表字段数上限控制在20到50之内.字段少而精可以提高并发，IO更高效 (<a href="http://imysql.com/2014/09/28/mysql-optimization-case-blob-stored-in-innodb-optimization.shtml" target="_blank" rel="noopener">优化InnoDB表BLOB列的存储效率</a>)</li>
+<li>平衡范式与冗余：效率优先，提高性能. 适时牺牲范式增加冗余</li>
+<li>MySQL ：使用业务无关的<a href="http://imysql.com/2014/09/14/mysql-faq-why-innodb-table-using-autoinc-int-as-pk.shtml" target="_blank" rel="noopener">自增主键</a></li>
+</ul>
+<h3 id="尽量使用索引"><a href="#尽量使用索引" class="headerlink" title="尽量使用索引"></a>尽量使用索引</h3><h4 id="1-谨慎合理的添加索引"><a href="#1-谨慎合理的添加索引" class="headerlink" title="1 谨慎合理的添加索引"></a>1 谨慎合理的添加索引</h4><p>索引能改善查询的效率，但是也会增加额外的开销并减慢更新的速度(更新时会同时更新索引). 索引的数量不是越多越好，能不加的索引尽量不加. InnoDB的<code>secondary index</code>(非主键索引）使用<code>b+tree</code>来存储，因此在UPDATE、DELETE、INSERT的时候需要对<code>b+tree</code>进行调整，过多的索引会减慢更新的速度.</p>
+<p>按照目前的业务需求，单表的索引应符合下列要求：</p>
+<ul>
+<li>索引数量控制在5个左右，单个索引的字段不超过5个.在设计的时候要结合SQL和需求考虑索引的覆盖.</li>
+<li>唯一键由3个以下字段组成，当字段都是整形时，使用唯一键作为主键.</li>
+<li>唯一键不和主键重复，即不得在主键上建唯一索引.</li>
+<li>较长的字段需加入前缀索引来减少索引长度，提高效率.</li>
+</ul>
+<p>例子如下:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">url</span>( address <span class="built_in">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>，<span class="keyword">index</span> idx_url(address(<span class="number">10</span>)));</span><br></pre></td></tr></table></figure>
+
+<p>前缀索引长度依据索引的覆盖率来定,建立索引之前最好查看下对应字段建立索引的概率.MySQL5.6优化了合并索引，也就是说一条SQL上可以使用两个索引了.</p>
+<h4 id="2-提高索引的覆盖率"><a href="#2-提高索引的覆盖率" class="headerlink" title="2 提高索引的覆盖率"></a>2 提高索引的覆盖率</h4><p>合理利用覆盖索引.</p>
+<p>关于覆盖索引：<code>InnoDB</code> 存储引擎中，<code>secondary index</code>（非主键索引）中没有直接存储行地址，而存储主键值. 如果用户需要查询<code>secondary index</code>中所不包含的数据列时，需要先通过<code>secondary index</code>查找到主键值，然后再通过主键查询到其他数据列，因此需要查询两次. 覆盖索引的概念就是查询可以通过在一个索引中完成，覆盖索引效率会比较高，主键查询是覆盖索引.</p>
+<p>合理的创建索引以及合理的使用查询语句，当使用到覆盖索引时可以获得性能提升.<br>比如<code>SELECT email,uid FROM user_email WHERE uid=xxx</code>，可以将索引添加为<code>index(uid,email)</code>，以提升性能.</p>
+<p>索引字段的顺序需要考虑字段值去重之后的个数，个数多的放在前面.<br>合理创建联合索引（避免冗余），(a,b,c相当于 (a、(a,b、(a,b,c). 遵循最左原则.<br>UPDATE、DELETE语句需要根据WHERE条件添加索引.</p>
+<h4 id="3-索引使用需要注意的事项"><a href="#3-索引使用需要注意的事项" class="headerlink" title="3 索引使用需要注意的事项"></a>3 索引使用需要注意的事项</h4><ul>
+<li><p>不建议使用<code>%</code>前缀模糊查询，例如<code>LIKE &quot;%xxx&quot;</code>，这样会扫全表.</p>
+</li>
+<li><p>不要在索引列进行数学或者函数计算.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> +<span class="number">1</span> =<span class="number">10000</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这样不会使用索引，导致扫全表，改为:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> =<span class="number">10000</span><span class="number">-1</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>EXPLAIN</code>判断SQL语句是否合理使用索引，尽量避免<code>extra</code>列出现：<code>Using File Sort</code>，<code>Using Temporary</code>.</p>
+<p>下面列出<code>extra</code>列常见的值:</p>
+<p>a. <code>Using Temporary</code></p>
+<p>为了解决查询，MySQL需要创建一个临时表来容纳结果. 典型情况如查询包含可以按不同情况列出列的<code>GROUP BY</code>和<code>ORDER BY</code>子句. 使用临时表的开销是比较大的.</p>
+<p>b. <code>Using File Sort</code></p>
+<p>MySQL需要额外的一次传递，以找出如何按排序顺序检索行. 出现这个说明SQL没有走索引. MySQL通过根据联接类型浏览所有行并为所有匹配WHERE子句的行保存排序关键字和行的指针来完成排序.</p>
+<p>c. <code>Using index</code></p>
+<p>从只使用索引树中的信息而不需要进一步搜索读取实际的行来检索表中的列信息.</p>
+<p>d. <code>Using where</code></p>
+<p>MySQL使用where条件进行过滤找到匹配行返回客户端.</p>
+</li>
+<li><p>禁止使用外键. 因为会产生额外开销，并且是逐行进行操作. 最关键的是在高并发的情况下很容易造成死锁.</p>
+</li>
+<li><p>SQL变更需要确认索引是否需要变更，并通知DBA.</p>
+</li>
+</ul>
+<h3 id="尽量使用查询缓存"><a href="#尽量使用查询缓存" class="headerlink" title="尽量使用查询缓存"></a>尽量使用查询缓存</h3><p><img src="/images/sql-optimize/sql-execute-flow.jpg" alt="执行流程"></p>
+<p>缓存始终是空间换时间的常用手段，对性能提升的效果十分显著。SQL在数据库中执行的流程如上图，请留意第②步，MySQL会检查传入的查询语句是否命中查询缓存中的数据。如果当前查询恰好命中查询缓存，在检查一次用户权限后直接返回缓存中的结果。这种情况下，查询不会被解析，也不会生成执行计划，更不会执行。</p>
+<p>注意的是，必须语句完全相同才能够命中缓存。如果查询中包含任何用户自定义函数、存储函数、用户变量、临时表、MySQL库中的系统表，其查询结果都不会被缓存。比如函数NOW()或者CURRENT_DATE()会因为不同的查询时间，返回不同的查询结果，再比如包含CURRENT_USER或者CONNECION_ID()的查询语句会因为不同的用户而返回不同的结果，将这样的查询结果缓存起来没有任何的意义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 不会开启查询缓存</span><br><span class="line">SELECT username FROM user WHERE signup_date &gt;= CURDATE()</span><br><span class="line"> </span><br><span class="line">// 使用变量绑定方式，会开启查询缓存</span><br><span class="line">SELECT username FROM user WHERE signup_date &gt;= ? </span><br><span class="line">//setDate(new Date())</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><p>MySQL选择合适的数据库引擎，参考<a href="https://coolshell.cn/articles/652.html" target="_blank" rel="noopener">酷壳文章</a></p>
+<p>参考</p>
+</li>
+</ul>
+<hr>
+<ol>
+<li><a href="https://blog.csdn.net/yzsind/article/details/6059209" target="_blank" rel="noopener">面向程序员的数据库访问性能优化法则</a></li>
+<li><a href="http://bohr.me/spec_mysql/" target="_blank" rel="noopener">mysql开发规范</a></li>
+<li><a href="https://dbaplus.cn/news-155-1531-1.html" target="_blank" rel="noopener">万字总结：学习MySQL优化原理，这一篇就够了！</a></li>
+<li><a href="https://coolshell.cn/articles/1846.html" target="_blank" rel="noopener">酷壳：MYSQL性能优化的最佳20+条经验</a></li>
+<li><a href="https://juejin.im/post/5c2c53396fb9a04a053fc7fe" target="_blank" rel="noopener">MySQL优化/面试，看这一篇就够了</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/48385127" target="_blank" rel="noopener">这大概是最全的sql优化方案了</a></li>
+<li><a href="http://imysql.com/2014/09/14/mysql-faq-why-innodb-table-using-autoinc-int-as-pk.shtml" target="_blank" rel="noopener">为什么InnoDB表要建议用自增列做主键</a></li>
+</ol>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
