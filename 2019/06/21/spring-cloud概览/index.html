@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="一粒麦子|麦子的博客">
+    <meta name="keyword" content="java">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        spring-cloud概览 - 一粒麦子 | 麦子的博客
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 落在地里死了，才能结出新的子粒 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/images/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>lucas</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见模式及对应组件"><span class="toc-text">常见模式及对应组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务注册及发现-eureka、consul"><span class="toc-text">服务注册及发现[eureka、consul]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#API网关（SpringCloudGateway-Zuul）"><span class="toc-text">API网关（SpringCloudGateway\Zuul）</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 落在地里死了，才能结出新的子粒 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        spring-cloud概览
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-06-21 17:01:11</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#spring-cloud" title="spring-cloud">spring-cloud</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#spring" title="spring">spring</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#概览" title="概览">概览</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>spring cloud是什么？看官网的介绍</p>
+<blockquote>
+<p>Spring Cloud provides tools for developers to quickly build some of the common patterns in distributed systems (e.g. configuration management, service discovery, circuit breakers, intelligent routing, micro-proxy, control bus, one-time tokens, global locks, leadership election, distributed sessions, cluster state). Coordination of distributed systems leads to boiler plate patterns, and using Spring Cloud developers can quickly stand up services and applications that implement those patterns. They will work well in any distributed environment, including the developer’s own laptop, bare metal data centres, and managed platforms such as Cloud Foundry.</p>
+</blockquote>
+<p>翻译如下</p>
+<blockquote>
+<p>Spring Cloud为开发人员提供了快速构建分布式系统中常见功能模式（比如，配置管理、服务发现、断路器、智能路由、微代理、控制总线、一次性令牌、全局锁、领导选举、分布式session、集群状态）的工具。分布式系统的协调性需求引致了这些boilerplate模式。开发人员可以使用SpringCloud快速的构建起使用了这些模式的应用和服务。而且可以在不同的分布式环境下工作良好，包括开发者的笔记本电脑，裸机数据中心或者Cloud Foundry这样的云平台。</p>
+</blockquote>
+<p>可见，spring cloud提供的快速实现分布式环境下常用的功能模式的能力。所以学习spring cloud的前提是要了解这些所谓的功能模式是什么含义。</p>
+<p>下面列举spring cloud的常用组件和对应的模式的意义，多为自己总结，仅供参考。</p>
+<h2 id="常见模式及对应组件"><a href="#常见模式及对应组件" class="headerlink" title="常见模式及对应组件"></a>常见模式及对应组件</h2><h3 id="服务注册及发现-eureka、consul"><a href="#服务注册及发现-eureka、consul" class="headerlink" title="服务注册及发现[eureka、consul]"></a>服务注册及发现[eureka、consul]</h3><p>微服务环境下，服务间需要互相调用。那么存在两个问题，从调用方来说，如何找到需要调用的服务？从被调用方，如何让调用方发现自己的服务？最简单的是硬编码，显然耦合太多，但是在运维方面的问题就会很大，无法自动化，无法实现如负载均衡，自动扩容等等。另一个办法就是提供一个服务注册和发现的server，所有的服务提供方将自己能够提供的服务注册到该server，调用方则去该server上去查找相应的服务。server居中管理服务，与各客户端保持服务状态的同步。这个过程就是服务的注册与发现过程。</p>
+<p>spring cloud提供了多个服务发现和注册方案。其中Netflix的eureka曾经很流行，但2.0后将不再维护。hashicorp开源的consul则是功能更为全面的选择，除了服务注册发现，consul还提供了k-v存储等其它功能，并且原生支持跨数据中心。</p>
+<h3 id="API网关（SpringCloudGateway-Zuul）"><a href="#API网关（SpringCloudGateway-Zuul）" class="headerlink" title="API网关（SpringCloudGateway\Zuul）"></a>API网关（SpringCloudGateway\Zuul）</h3><p>微服务架构下的服务粒度很细，对外部而言使用难度增加，完成一个业务操作可能会调用多个服务，同时从外部而来的服务调用都需要验证鉴权这类的安全处理，每个服务都去重复此类操作是毫无意义而且成本高昂的。为此，在微服务之前加入API网关，技术上统一处理重复的验证鉴权等操作，业务上聚合微服务给外部使用，降低使用成本。</p>
+<p>Netflix提供了zuul，技术上来说是接管请求，并且加载各种Filter组成责任链依次执行。因此，zuul可以提供Filter来验证鉴权等操作，也可以通过提供另外的Filter来作路由转发。</p>
+<p>Spring Cloud Gateway，基于spring5提供的reactor技术栈，异步处理，性能更好。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
