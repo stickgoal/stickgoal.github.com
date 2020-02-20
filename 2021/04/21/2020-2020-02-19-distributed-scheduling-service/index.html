@@ -175,7 +175,7 @@
 <p>直接运行XxlJobExecutorApplication</p>
 <p>5）开发定时任务，并封装成rest风格的api，提供外部可调用的连接</p>
 <p>6）添加定时任务配置，使用admin/123456登录admin，在任务管理中添加任务，如下图</p>
-<p><img src="/Users/lucas/Documents/work/workspace/stickgoal/source/images/ds_schedule/xxl-task-config.png" alt="定时任务配置">这个任务指向的地址就是需要执行的任务链接。我的cron表达式定义是每隔3分钟执行一次。所以会每隔3分钟调用一次任务地址。</p>
+<p><img src="/images/ds_schedule/xxl-task-config.png" alt="定时任务配置">这个任务指向的地址就是需要执行的任务链接。我的cron表达式定义是每隔3分钟执行一次。所以会每隔3分钟调用一次任务地址。</p>
 <p>定时任务日志可以在调度日志里看到。</p>
 <p>这里需要提一下的是，官方提供的spring-boot的只是例子，真正场景下也可以集成到自己的项目中，比如使用spring-cloud时，可以建一个独立项目，集成xxl-exeutor后使用feign进行服务调用。</p>
 <h3 id="定时任务基础-Cron表达式"><a href="#定时任务基础-Cron表达式" class="headerlink" title="定时任务基础-Cron表达式"></a>定时任务基础-Cron表达式</h3><p><img src="https://image-static.segmentfault.com/371/934/3719340181-5e1c960388fe7_articlex" alt="cron表达式"></p>
