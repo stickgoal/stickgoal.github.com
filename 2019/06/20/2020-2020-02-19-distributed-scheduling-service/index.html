@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="一粒麦子|麦子的博客">
+    <meta name="keyword" content="java">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        分布式调度服务 - 一粒麦子 | 麦子的博客
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 落在地里死了，才能结出新的子粒 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/images/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>lucas</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#方案1-spring-task的-Scheduled注解"><span class="toc-text">方案1. spring-task的@Scheduled注解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方案2-rabbitmq的死信队列"><span class="toc-text">方案2. rabbitmq的死信队列</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方案3-独立的分布式定时任务调度中间件"><span class="toc-text">方案3. 独立的分布式定时任务调度中间件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定时任务基础-Cron表达式"><span class="toc-text">定时任务基础-Cron表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定时任务的基础qutarz"><span class="toc-text">定时任务的基础qutarz</span></a>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 落在地里死了，才能结出新的子粒 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        分布式调度服务
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-06-20 10:19:03</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#xxl" title="xxl">xxl</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#quatz" title="quatz">quatz</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#分布式" title="分布式">分布式</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>定时任务在应用开发中是不可或缺的功能。B/S结构的系统中，程序被触发只有两个渠道。一个是用户操作，当用户浏览器访问，发送对应的请求，对应的程序就会执行；另一个是系统内部触发，也就是某些不需要人工参与的系统操作，比如每天凌晨12：00固定执行的对账任务；订单的15分钟过期取消任务等等。后者就要求系统能够自行触发，这种时候就是定时任务出场的时候了。</p>
+<p>列出以下常见的几种解决方案</p>
+<h4 id="方案1-spring-task的-Scheduled注解"><a href="#方案1-spring-task的-Scheduled注解" class="headerlink" title="方案1. spring-task的@Scheduled注解"></a>方案1. spring-task的@Scheduled注解</h4><p>spring提供的定时任务注解,操作简单，参考<a href="http://www.ityouknow.com/springboot/2016/12/02/spring-boot-scheduler.html" target="_blank" rel="noopener">文章</a></p>
+<p><strong>解释：</strong>在类方法上加    <code>@Scheduled(cron=&quot;*/6 * * * * ?&quot;)</code>  注解，即可在spring中启用定时任务。当中的cron表达式稍后解释。</p>
+<p><strong>优势：</strong>集成简单</p>
+<p><strong>缺陷:</strong> 分布式环境下会出现并发问题，重复执行，比如同一个应用部署了两台机器时，会出现同时在8：00执行一个定时任务，那么就会执行两次定时，这时就需要调度。粗糙的解决方案是加锁，同时只允许一个执行，代码再进行一个状态判断，就不会造成反复执行，可以使用redis或者数据库都可以加锁。</p>
+<h4 id="方案2-rabbitmq的死信队列"><a href="#方案2-rabbitmq的死信队列" class="headerlink" title="方案2. rabbitmq的死信队列"></a>方案2. rabbitmq的死信队列</h4><p><strong>解释：</strong>基于时间间隔的事件型任务可以采用该种方式，比如订单15分钟的过期取消，<a href="https://www.jianshu.com/p/986ee5eb78bc" target="_blank" rel="noopener">参考文章</a></p>
+<p>主要思路是利用rabbitmq的所谓死信队列，将数据放入队列中，如果超过了一定时间则被转到另一个死信队列。此时监听死信队列，就可以执行任务取消的后序操作了。</p>
+<p>因为借用了rabbitmq中间件，所以在分布式环境下也不会出现重复调用的问题。</p>
+<p><strong>优势：</strong>实现较为简单，事件型的触发方式只在需要时才触发，不需要频繁查询状态，降低消耗</p>
+<p><strong>缺陷：</strong>需要rabbitmq支持，应用场景限于时间超时</p>
+<h3 id="方案3-独立的分布式定时任务调度中间件"><a href="#方案3-独立的分布式定时任务调度中间件" class="headerlink" title="方案3. 独立的分布式定时任务调度中间件"></a>方案3. 独立的分布式定时任务调度中间件</h3><p><strong>解释：</strong>独立的定时任务调度中间件显然是解决问题的一个合理方案。即，将任务调度独立到一个调度服务中处理。那么就可以从外部来调度服务了。xxl分布式定时任务中间件。同类的产品有当当的 elastic-job</p>
+<p><strong>优势：</strong>生产级，成熟，功能丰富，适用于大部分场景</p>
+<p><strong>缺陷：</strong>需要独立部署</p>
+<p><strong>步骤：</strong> </p>
+<p>1）阅读XXL的文档 <a href="https://www.xuxueli.com/xxl-job/" target="_blank" rel="noopener">https://www.xuxueli.com/xxl-job/</a> 有详细的步骤，以下列出简要步骤</p>
+<p>2） 下载源码   <a href="https://gitee.com/xuxueli0323/xxl-job" target="_blank" rel="noopener">仓库地址</a> </p>
+<p>3） 部署调度中心  xxl-job-admin</p>
+<pre><code>1. 执行数据库脚本 /xxl-job/doc/db/tables_xxl_job.sql
+2. 修改application.properties 修改数据源，适合你的场景，主要是改改驱动版本
+3. 将项目导入到idea中运行Application
+4. 访问http://127.0.0.1:8080/xxl-job-admin/</code></pre><p>4）部署执行器项目 xxl-job-executor-sample-springboot</p>
+<p>直接运行XxlJobExecutorApplication</p>
+<p>5）开发定时任务，并封装成rest风格的api，提供外部可调用的连接</p>
+<p>6）添加定时任务配置，使用admin/123456登录admin，在任务管理中添加任务，如下图</p>
+<p><img src="/Users/lucas/Documents/work/workspace/stickgoal/source/images/ds_schedule/xxl-task-config.png" alt="定时任务配置">这个任务指向的地址就是需要执行的任务链接。我的cron表达式定义是每隔3分钟执行一次。所以会每隔3分钟调用一次任务地址。</p>
+<p>定时任务日志可以在调度日志里看到。</p>
+<p>这里需要提一下的是，官方提供的spring-boot的只是例子，真正场景下也可以集成到自己的项目中，比如使用spring-cloud时，可以建一个独立项目，集成xxl-exeutor后使用feign进行服务调用。</p>
+<h3 id="定时任务基础-Cron表达式"><a href="#定时任务基础-Cron表达式" class="headerlink" title="定时任务基础-Cron表达式"></a>定时任务基础-Cron表达式</h3><p><img src="https://image-static.segmentfault.com/371/934/3719340181-5e1c960388fe7_articlex" alt="cron表达式"></p>
+<p>定时设置需要使用到cron表达式，是源自linux操作系统crontab命令的一种定时格式字符串。 </p>
+<p>Cron表达式分成6-7子表达式，每个表达式表达一个计划。先来看一些例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">*/5 * * * * ? 每隔5秒执行一次</span><br><span class="line">0 */1 * * * ? 每隔1分钟执行一次</span><br><span class="line">0 0 5-15 * * ? 每天5-15点整点触发</span><br><span class="line">0 0/3 * * * ? 每三分钟触发一次</span><br><span class="line">0 0-5 14 * * ? 在每天下午2点到下午2:05期间的每1分钟触发 </span><br><span class="line">0 0/5 14 * * ? 在每天下午2点到下午2:55期间的每5分钟触发</span><br><span class="line">0 0/5 14,18 * * ? 在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发</span><br><span class="line">0 0/30 9-17 * * ? 朝九晚五工作时间内每半小时</span><br><span class="line">0 0 10,14,16 * * ? 每天上午10点，下午2点，4点 </span><br><span class="line"></span><br><span class="line">0 0 12 ? * WED 表示每个星期三中午12点</span><br><span class="line">0 0 17 ? * TUES,THUR,SAT 每周二、四、六下午五点</span><br><span class="line">0 10,44 14 ? 3 WED 每年三月的星期三的下午2:10和2:44触发 </span><br><span class="line">0 15 10 ? * MON-FRI 周一至周五的上午10:15触发</span><br><span class="line">0 0 23 L * ? 每月最后一天23点执行一次</span><br><span class="line">0 15 10 L * ? 每月最后一日的上午10:15触发 </span><br><span class="line">0 15 10 ? * 6L 每月的最后一个星期五上午10:15触发 </span><br><span class="line">0 15 10 * * ? 2005 2005年的每天上午10:15触发 </span><br><span class="line">0 15 10 ? * 6L 2002-2005 2002年至2005年的每月的最后一个星期五上午10:15触发 </span><br><span class="line">0 15 10 ? * 6#3 每月的第三个星期五上午10:15触发</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;30 * * * * ?&quot; 每半分钟触发任务</span><br><span class="line">&quot;30 10 * * * ?&quot; 每小时的10分30秒触发任务</span><br><span class="line">&quot;30 10 1 * * ?&quot; 每天1点10分30秒触发任务</span><br><span class="line">&quot;30 10 1 20 * ?&quot; 每月20号1点10分30秒触发任务</span><br><span class="line">&quot;30 10 1 20 10 ? *&quot; 每年10月20号1点10分30秒触发任务</span><br><span class="line">&quot;30 10 1 20 10 ? 2011&quot; 2011年10月20号1点10分30秒触发任务</span><br><span class="line">&quot;30 10 1 ? 10 * 2011&quot; 2011年10月每天1点10分30秒触发任务</span><br><span class="line">&quot;30 10 1 ? 10 SUN 2011&quot; 2011年10月每周日1点10分30秒触发任务</span><br><span class="line">&quot;15,30,45 * * * * ?&quot; 每15秒，30秒，45秒时触发任务</span><br><span class="line">&quot;15-45 * * * * ?&quot; 15到45秒内，每秒都触发任务</span><br><span class="line">&quot;15/5 * * * * ?&quot; 每分钟的每15秒开始触发，每隔5秒触发一次</span><br><span class="line">&quot;15-30/5 * * * * ?&quot; 每分钟的15秒到30秒之间开始触发，每隔5秒触发一次</span><br><span class="line">&quot;0 0/3 * * * ?&quot; 每小时的第0分0秒开始，每三分钟触发一次</span><br><span class="line">&quot;0 15 10 ? * MON-FRI&quot; 星期一到星期五的10点15分0秒触发任务</span><br><span class="line">&quot;0 15 10 L * ?&quot; 每个月最后一天的10点15分0秒触发任务</span><br><span class="line">&quot;0 15 10 LW * ?&quot; 每个月最后一个工作日的10点15分0秒触发任务</span><br><span class="line">&quot;0 15 10 ? * 5L&quot; 每个月最后一个星期四的10点15分0秒触发任务</span><br><span class="line">&quot;0 15 10 ? * 5#3&quot; 每个月第三周的星期四的10点15分0秒触发任务</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Required</th>
+<th align="left">Allowed Values</th>
+<th align="left">Allowed Special Characters</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Seconds</td>
+<td align="left">Y</td>
+<td align="left">0-59</td>
+<td align="left">, - * /</td>
+</tr>
+<tr>
+<td align="left">Minutes</td>
+<td align="left">Y</td>
+<td align="left">0-59</td>
+<td align="left">, - * /</td>
+</tr>
+<tr>
+<td align="left">Hours</td>
+<td align="left">Y</td>
+<td align="left">0-23</td>
+<td align="left">, - * /</td>
+</tr>
+<tr>
+<td align="left">Day of month</td>
+<td align="left">Y</td>
+<td align="left">1-31</td>
+<td align="left">, - * ? / L W C</td>
+</tr>
+<tr>
+<td align="left">Month</td>
+<td align="left">Y</td>
+<td align="left">0-11 or JAN-DEC</td>
+<td align="left">, - * /</td>
+</tr>
+<tr>
+<td align="left">Day of week</td>
+<td align="left">Y</td>
+<td align="left">1-7 or SUN-SAT</td>
+<td align="left">, - * ? / L C #</td>
+</tr>
+<tr>
+<td align="left">Year</td>
+<td align="left">N</td>
+<td align="left">empty or 1970-2099</td>
+<td align="left">, - * /</td>
+</tr>
+</tbody></table>
+<p>Seconds (秒)         ：可以用数字0－59 表示，</p>
+<p>Minutes(分)          ：可以用数字0－59 表示，</p>
+<p>Hours(时)             ：可以用数字0-23表示,</p>
+<p>Day-of-Month(天) ：可以用数字1-31 中的任一一个值，但要注意一些特别的月份</p>
+<p>Month(月)            ：可以用0-11 或用字符串  “JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV and DEC” 表示</p>
+<p>Day-of-Week(每周)：可以用数字1-7表示（1 ＝ 星期日）或用字符口串“SUN, MON, TUE, WED, THU, FRI and SAT”表示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">* 表示所有值； </span><br><span class="line">? 表示未说明的值，即不关心它为何值；用于占位； </span><br><span class="line">- 表示一个指定的范围； 5-7 就是在5-7之间</span><br><span class="line">, 表示附加一个可能值； </span><br><span class="line">/ 符号前表示开始时间，符号后表示每次递增的值；0/5 </span><br><span class="line"></span><br><span class="line">L(&quot;last&quot;) (&quot;last&quot;) &quot;L&quot; 用在day-of-month字段意思是 &quot;这个月最后一天&quot;；用在 day-of-week字段, 它简单意思是 &quot;7&quot; or &quot;SAT&quot;。 如果在day-of-week字段里和数字联合使用，它的意思就是 &quot;这个月的最后一个星期几&quot; – 例如： &quot;6L&quot; means &quot;这个月的最后一个星期五&quot;. 当我们用“L”时，不指明一个列表值或者范围是很重要的，不然的话，我们会得到一些意想不到的结果。 </span><br><span class="line">W(&quot;weekday&quot;) 只能用在day-of-month字段。用来描叙最接近指定天的工作日（周一到周五）。例如：在day-of-month字段用“15W”指“最接近这个 月第15天的工作日”，即如果这个月第15天是周六，那么触发器将会在这个月第14天即周五触发；如果这个月第15天是周日，那么触发器将会在这个月第 16天即周一触发；如果这个月第15天是周二，那么就在触发器这天触发。注意一点：这个用法只会在当前月计算值，不会越过当前月。“W”字符仅能在 day-of-month指明一天，不能是一个范围或列表。也可以用“LW”来指定这个月的最后一个工作日。 </span><br><span class="line"></span><br><span class="line"># 只能用在day-of-week字段。用来指定这个月的第几个周几。例：在day-of-week字段用&quot;6#3&quot;指这个月第3个周五（6指周五，3指第3个）。如果指定的日期不存在，触发器就不会触发。</span><br><span class="line"></span><br><span class="line">C 指和calendar联系后计算过的值。例：在day-of-month 字段用“5C”指在这个月第5天或之后包括calendar的第一天；在day-of-week字段用“1C”指在这周日或之后包括calendar的第一天。</span><br></pre></td></tr></table></figure>
+
+<p>网上有现成的cron表达式生成器，可以选用，当然xxl中也集成了一个，生成完成请结合以上例子反复确认下，以免造成资源浪费</p>
+<p><a href="https://qqe2.com/cron" target="_blank" rel="noopener">https://qqe2.com/cron</a></p>
+<h3 id="定时任务的基础qutarz"><a href="#定时任务的基础qutarz" class="headerlink" title="定时任务的基础qutarz"></a>定时任务的基础qutarz</h3><p>企业级应用开发中的定时任务开源库主要是qutarz，但由于它本身对分布式环境不够友好，而且侵入性强，所以无法直接使用。如果想要深入了解定时任务，就可以学习下qutarz。XXL等众多定时任务都基于qutarz实现。<a href="http://www.quartz-scheduler.org/" target="_blank" rel="noopener">官网</a></p>
+<blockquote>
+<p>Quartz is a <a href="http://www.quartz-scheduler.org/documentation/2.4.0-SNAPSHOT/introduction.html#features" target="_blank" rel="noopener">richly featured</a>, open source job scheduling library that can be integrated within virtually any Java application - from the smallest stand-alone application to the largest e-commerce system. Quartz can be used to create simple or complex schedules for executing tens, hundreds, or even tens-of-thousands of jobs; jobs whose tasks are defined as standard Java components that may execute virtually anything you may program them to do. The Quartz Scheduler includes many enterprise-class features, such as support for JTA transactions and clustering.</p>
+<p>Quartz是一个功能丰富的，开源任务调度库，能够透明的集成到任何的java应用，从最小的独立应用或者最大的商务系统。Quartz能够用于创建简单或复杂的定时计划以执行累以十、百、千计的任务。这些任务可以被定义成独立的java组件来执行任何事情。Quartz定时器也支持众多企业级特性，比如支持JTA事务和集群。</p>
+</blockquote>
+<p>主要组件</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/763193-1a81cd9837f16b16.png" alt="img"></p>
+<p>推荐教程：</p>
+<p>快速教程<a href="https://www.jianshu.com/p/ce4c4400eea2" target="_blank" rel="noopener">https://jianshu.com/p/ce4c4400eea2</a></p>
+<p>详细教程 <a href="https://www.w3cschool.cn/quartz_doc/" target="_blank" rel="noopener">https://www.w3cschool.cn/quartz_doc/</a></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
